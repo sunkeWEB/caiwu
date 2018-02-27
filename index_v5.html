@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>优米云</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <!-- Morris -->
+    <link href="css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <link href="https://cdn.bootcss.com/layer/3.1.0/mobile/need/layer.css" rel="stylesheet">
+    <link rel="stylesheet" href="js/plugins/layDate/laydate/theme/default/laydate.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <style>
+        .columns button, .dropup button {
+            background-color: white;
+            color: #000;
+        }
+
+        #toolbar {
+            display: flex;
+        }
+
+        .gjsearch {
+            margin-left: 10px;
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            font-size: 13px;
+            padding: 0 10px;
+            height: 34px;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="modal fade" id="myModa71" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabe71">应收应付修改</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" style="display: flex">
+                        <label class="control-label" style="width: 122px">所属大类</label>
+                        <div class="" style="width: 100%">
+                            <select class="form-control m-b ssdl" name="account">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="display: flex">
+                        <label class="control-label" style="width: 122px">所属小类</label>
+                        <div class="" style="width: 100%">
+                            <select class="form-control m-b ssxl" name="account">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: flex">
+                        <label class="control-label" style="width: 122px">金额</label>
+                        <div class="" style="width: 100%">
+                            <input type="number" class="form-control price">
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: flex">
+                        <label class="control-label" style="width: 122px">记账时间</label>
+                        <div class="" style="width: 100%">
+                            <input type="text" class="form-control" placeholder="请选择记账时间" id="test1">
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: flex">
+                        <label class="control-label" style="width: 122px">收款期限</label>
+                        <div class="" style="width: 100%">
+                            <input type="text" class="form-control" placeholder="请选择收款期限" id="test2">
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: flex">
+                        <label class="control-label" style="width: 122px">生意伙伴</label>
+                        <div class="" style="width: 100%">
+                            <select class="form-control  syhb" name="account" data-live-search="true">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: flex">
+                        <label class="control-label" style="width: 122px">业务项目</label>
+                        <div class="" style="width: 100%">
+                            <select class="form-control m-b ywxm selectpicker" name="account"
+                                    data-live-search="true">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: flex">
+                        <label class="col-sm-2 control-label" style="width: 122px">经办人</label>
+                        <div class="" style="width: 100%">
+                            <select class="form-control m-b jbpeople" name="account">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: flex">
+                        <label class="col-sm-2 control-label" style="width: 122px">说明</label>
+                        <div class="" style="width: 100%">
+                            <textarea class="form-control sm1" name="" rows="5" style="width: 100%"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary updateysyf">修改</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <table data-toggle="table" id="table">
+                <div id="toolbar">
+                    <div>
+                        <select id="sel_exportoption" class="form-control selecrex">
+                            <option value="basic">导出当前页面数据</option>
+                            <option value="all">导出全部数据</option>
+                            <option value="selected">导出选中数据</option>
+                        </select>
+                    </div>
+                    <div class="gjsearch">
+                        <span style="color: #fa8d6a">盈亏:￥<span id="syinkui">0.00</span></span>
+                        <span style="color: deepskyblue">应收:￥<span id="ys">0.00</span></span>
+                        <span style="color:mediumaquamarine">应付:￥<span id="yf">0.00</span></span>
+                    </div>
+                </div>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<!-- Flot -->
+<script src="js/plugins/flot/jquery.flot.js"></script>
+<script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="js/plugins/flot/jquery.flot.spline.js"></script>
+<script src="js/plugins/flot/jquery.flot.resize.js"></script>
+<script src="js/plugins/flot/jquery.flot.pie.js"></script>
+<script src="js/plugins/flot/jquery.flot.symbol.js"></script>
+
+<!-- Peity -->
+<script src="js/plugins/peity/jquery.peity.min.js"></script>
+<script src="js/demo/peity-demo.js"></script>
+
+<!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
+
+
+<!-- jQuery UI -->
+<script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- Jvectormap -->
+<script src="js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+
+<!-- EayPIE -->
+<script src="js/plugins/easypiechart/jquery.easypiechart.js"></script>
+
+<!-- Sparkline -->
+<script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Sparkline demo data  -->
+<script src="js/demo/sparkline-demo.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="js/plugins/bootstrap-table/tableExport.js"></script>
+<script src="js/plugins/bootstrap-table/export/bootstrap-table-export.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="js/plugins/layDate/laydate/laydate.js"></script>
+<script src="js/myjquery.js"></script>
+<script>
+    var xtype, data, pid;
+    var $table = $('#table');
+    $table.bootstrapTable({
+        url: 'http://' + window.location.hostname + ':3000/reads/readysyf',         //请求后台的URL（*）
+        method: 'get',             //请求方式（*）
+        toolbar: '#toolbar',        //工具按钮用哪个容器
+        pagination: true,                   //是否显示分页（*）
+        cache: true,
+        showColumns: true,
+        striped: true,
+        showExport: true,//显示导出按钮
+        exportDataType: "basic", //basic', 'all', 'selected'.
+        exportTypes: ['excel'],
+        exportOptions: {
+            ignoreColumn: [0, 11],  //忽略某一列的索引
+            fileName: '应收应付流水列表',  //文件名称设置
+            worksheetName: 'sheet1',  //表格工作区名称
+            excelstyles: ['background-color', 'color', 'font-size', 'font-weight'],
+            onMsoNumberFormat: $.DoOnMsoNumberFormat
+        },
+        queryParamsType: 'limit',
+        queryParams: function (params) {
+            var obj = {};
+            obj['limit'] = params.limit;
+            obj['offset'] = params.offset;
+            obj['order'] = params.order;
+            obj['search'] = params.search;
+            obj['sort'] = params.sort;
+            obj['dengji'] = parent.dengji;
+            obj['id'] = parent.jzrid;
+            return obj;
+        },
+        contentType: "application/x-www-form-urlencoded", /**支持跨域**/
+        clickToSelect: true,
+        showRefresh: true,                  //是否显示刷新按钮
+        pageList: [5, 10, 15, 20],
+//        showPaginationSwitch: true,       //是否显示选择分页数按钮
+        pageNumber: 1,                       //初始化加载第一页，默认第一页
+        pageSize: 10, //每页的记录行数（*）
+        search: true,
+        sidePagination: "server", //服务端处理分页
+        columns: [
+            {
+                checkbox: true,
+                title: '选择'
+            }, {
+                title: "单号",
+                field: '_id',
+                align: 'center',
+                valign: 'middle',
+                visible: false
+            },
+            {
+                title: "选择",
+                field: 'dtype',
+                align: 'center',
+                valign: 'middle',
+                visible: false
+            },
+            {
+                title: '小类',
+                field: 'ssxtype',
+                align: 'center',
+                valign: 'middle',
+                visible: false
+            },
+            {
+                title: '时间',
+                field: 'jztime',
+                align: 'center',
+                valign: 'middle',
+                sortable: true,
+                formatter: function (value) {
+                    return new Date(parseInt(value) * 1000).toLocaleDateString();
+                }
+            },
+            {
+                title: '[类型]大类->小类',
+                field: 'ssdtype',
+                align: 'center',
+                valign: 'middle',
+                formatter: function (value, row) {
+
+                    return "<span>" + value + " -> " + row.ssxtype + "</span>";
+                }
+            }, {
+                title: '应收',
+                field: 'price',
+                align: 'center',
+                valign: 'middle',
+                sortable: true,
+                formatter: function (value, row) {
+                    if (row.dtype == 1) {
+                        return value
+                    }
+                }
+            }, {
+                title: '应付',
+                field: 'price',
+                align: 'center',
+                valign: 'middle',
+                sortable: true,
+                formatter: function (value, row) {
+                    if (row.dtype == 0) {
+                        return value
+                    }
+                }
+            }, {
+                title: '生意伙伴',
+                field: 'yshb',
+                align: 'center',
+                valign: 'middle'
+            }
+            , {
+                title: '业务项目',
+                field: 'ywxm',
+                align: 'center',
+                valign: 'middle'
+            }, {
+                title: '经办人',
+                field: 'jbr',
+                align: 'center',
+                valign: 'middle'
+            }
+            , {
+                title: '记账人',
+                field: 'jzr',
+                align: 'center',
+                valign: 'middle'
+            }
+            , {
+                title: '期限',
+                field: 'sktime',
+                align: 'center',
+                valign: 'middle',
+                formatter: function (value) {
+                    return new Date(parseInt(value) * 1000).toLocaleDateString();
+                }
+            }, {
+                title: '说明',
+                field: 'sm',
+                align: 'center',
+                valign: 'middle'
+            }, {
+                title: '操作',
+                align: 'center',
+                valign: 'middle',
+                sortable: true,
+                formatter: function (value, row) {
+                    var id = row._id;
+                    var name = row.ssdtype;
+                    var price = row.price;
+                    return `<button type="button" class="btn" onclick="del('${name}','${price}','${id}')" style="background-color: salmon;color: white"><i class="glyphicon glyphicon-trash"></i>删除</button>
+                             <button type="button" class="btn" onclick="edit('${id}')" style="background-color: #1d75b3;color: white"><i class="glyphicon glyphicon-pencil"></i>编辑</button>`
+                }
+            }
+        ],
+        responseHandler: function (res) {
+            let ys = 0, yf = 0;
+            if (res.ysyftotal.length > 1) {
+                for (var g = 0; g < res.ysyftotal.length; g++) {
+                    if (res.ysyftotal[g]._id === 1) {
+                        ys = res.ysyftotal[g].num;
+                        $('#ys').text($.fmoney(res.ysyftotal[g].num, 2, ','));
+                    }
+                    if (res.ysyftotal[g]._id === 0) {
+                        yf = res.ysyftotal[g].num;
+                        $('#yf').text($.fmoney(res.ysyftotal[g].num, 2, ','));
+                    }
+                }
+                $('#syinkui').text($.fmoney((ys - yf), 2, ','));
+            } else if (res.ysyftotal.length === 1) {
+                if (res.ysyftotal[0]._id === 1) {  // 如果收入有值  支出没有
+                    $('#ys').text($.fmoney(res.ysyftotal[0].num, 2, ','));
+                    ys = res.ysyftotal[0].num;
+                    $('#yf').text(0.00);
+                } else {
+                    $('#yf').text($.fmoney(res.ysyftotal[0].num, 2, ','));
+                    yf = res.ysyftotal[0].num;
+                    $('#ys').text(0.00);
+                }
+                $('#syinkui').text($.fmoney((ys - yf), 2, ','));
+            } else {
+                ys = 0;
+                yf = 0;
+                $('#ys').text(0.00);
+                $('#yf').text(0.00);
+                $('#syinkui').text(0.00);
+            }
+            return {
+                "total": res.total,//总页数
+                "rows": res.data   //数据
+            };
+        },
+    });
+    $(function () {
+        $('#sel_exportoption').selectpicker({
+            style: 'btn-white',
+            size: 4
+        });
+        // 大类改动  小类联动
+        $('.ssdl').change(function (e) {
+            e.stopPropagation();
+            $('.ssxl option').remove();
+            var nums = $(this).find('option:selected').data('num');
+            xtype[nums].forEach(function (its) {
+                $('.ssxl').append(`<option value="${its}">${its}</option>`);
+            });
+            //小类
+            $('.ssxl').nextAll().remove();  // bug
+            $('.ssxl').selectpicker('refresh');
+        });
+        // 选择导出 all selected basic
+        $('.selecrex').click(function () {
+            var exportoption = $(this).find('option:selected').val();
+            $('#table').bootstrapTable('refreshOptions', {
+                exportDataType: exportoption
+            });
+        });
+        // 修改
+        $('.updateysyf').click(function () {
+            var dtype = $('.ssdl').find('option:selected').text();// 大类
+            var xtype = $('.ssxl').find('option:selected').text();// 小类
+            var price = $('.price').val();// 金额
+            var time = $('#test1').val();// 记账时间
+            var time1 = $('#test2').val();// 收款时间
+            var syhb = $('.syhb').find('option:selected').text();// 生意伙伴
+            var ywxm = $('.ywxm').find('option:selected').text();// 业务项目
+            var sm1 = $('.sm1').val();// 说明
+            var jbpeople = $('.jbpeople').find('option:selected').text();// 经办人
+            var data = {
+                ssdtype: dtype,
+                ssxtype: xtype,
+                price: parseInt(price),
+                yshb: syhb,
+                ywxm: ywxm,
+                jbr: jbpeople,
+                sm: sm1,
+                time: new Date(time) / 1000,
+                time1: new Date(time1) / 1000,
+                jzr: parent.jzrzcname
+            };
+            var uurl = "http://" + window.location.hostname + ":3000/dxtypes/updateysyf";
+            var result = $.updateData(uurl, pid, data);
+            if (result.code == 1) {
+                layer.msg(res.msg);
+                return false;
+            }
+            layer.msg(result.msg);
+            $('#myModa71').modal('hide');
+            $('.modal-body input').val('');
+            $table.bootstrapTable('refresh');
+        });
+        var pople = sendAjax('http://' + window.location.hostname + ':3000/reads/readyuangong');
+        if (pople.data.length === 0) {
+            return false;
+        }
+        pople.data.forEach((item, index) => {
+            $('.jbpeople').append(`<option value="${item.name}" data-num="${index}">${item.name}</option>`);
+        });
+        $('.jbpeople').nextAll().remove();  // bug
+        $('.jbpeople').selectpicker('refresh');
+    });
+
+    function del(name, price, id) {
+        layer.confirm('你确定删除 ' + name + "金额 " + price + ' 这一项记录嘛？', {
+            btn: ['果断删除', '放弃'] //按钮
+        }, function () {
+            var url = "http://" + window.location.hostname + ":3000/dxtypes/delysyf";
+            var res = $.deletelData(url, id);
+            if (res.code == 1) {
+                layer.msg(res.msg);
+                return false;
+            }
+            layer.msg(res.msg);
+            $table.bootstrapTable('refresh');
+        })
+    }
+
+    function edit(id) {
+        pid = id;
+        var url = "http://" + window.location.hostname + ":3000/reads/readysyf";
+        $.ajax({
+            url: url,
+            type: 'get',
+            data: {sid: pid, id: parent.jzrid},
+            dataType: 'json',
+            success: function (res) {
+                if (res.code != 0) {
+                    layer.msg(res.msg);
+                    return false;
+                }
+                var lists = res.data[0];
+                laydate.render({
+                    elem: '#test1', //指定元素
+                    value: new Date((lists.jztime) * 1000)
+                });
+                laydate.render({
+                    elem: '#test2', //指定元素
+                    value: new Date((lists.sktime) * 1000)
+                });
+                $('.price').val(lists.price);
+                $('.sm1').val(lists.sm);
+                console.log(lists.dtype);
+                getDxtype(lists.dtype.toString(), lists.ssdtype, lists.ssxtype);
+                getDatas(lists.yshb, lists.ywxm); // 初始化 生意伙伴 项目
+                $('#myModa71').modal('show');
+            }
+        });
+    }
+
+    function getDxtype(type, ssdtype, ssxtype) {
+        var types = type == '1' ? '0' : '1';
+        var res = sendAjax('http://' + window.location.hostname + ':3000/reads/readdalei', 'get', {type: types});
+        if (!res.code == 0) {
+            layer.msg("系统错误  获取失败");
+            return false;
+        }
+        $('.ssxl option').remove();
+        $('.ssdl option').remove();
+
+        data = res.data;
+        xtype = [];
+
+        var k = 0; // 记录大类的数组位置
+        let ks = [];
+        data.map((item, index) => {
+            $('.ssdl').append(`<option value="${item.name}" data-num="${index}">${item.name}</option>`);
+            if (ssdtype == item.name) {
+                ks = item.sunlist
+            }
+        });
+
+        $('.ssdl').selectpicker('val', ssdtype);
+        //所属大类下拉 初始化
+        // 小类初始化
+        ks.map(function (its) {
+            $('.ssxl').append(`<option value="${its.name}">${its.name}</option>`);
+        });
+        $('.ssxl').selectpicker('val', ssxtype);
+        $('.ssxl').selectpicker({
+            style: 'btn-white',
+            size: 5,
+        });
+        $('.ssdl').nextAll().remove();  // bug
+        $('.ssdl').selectpicker('refresh');
+        $('.ssxl').nextAll().remove();  // bug
+        $('.ssxl').selectpicker('refresh');
+    }
+
+    function getDatas(yshb, ywxm) {
+        var res1 = sendAjax('http://' + window.location.hostname + ':3000/reads/readyshb', 'get');
+        if (res1.code != 0) {
+            layer.msg("初始化数据失败");
+            return false;
+        }
+        $('.syhb option').remove();
+        $('.ywxm option').remove();
+        //业务项目
+        res1.gcxm.forEach(function (items) {
+            $('.ywxm').append(`<option value="${items.name}">${items.name}</option>`);
+        });
+        res1.yshb.forEach(function (items) {
+            $('.syhb').append(`<option value="${items.name}">${items.name}</option>`);
+        });
+        // 生意伙伴
+        $('.syhb').selectpicker('val', yshb);
+        $('.syhb').selectpicker({
+            style: 'btn-white',
+            size: 5,
+            liveSearchPlaceholder: '查找你的生意伙伴',
+            noneResultsText: '没有查询到相关的信息'
+        });
+        $('.syhb').nextAll().remove();  // bug
+        $('.syhb').selectpicker('refresh');
+        // 生意伙伴
+        $('.ywxm').selectpicker('val', ywxm);
+        $('.ywxm').selectpicker({
+            style: 'btn-white',
+            size: 5,
+            liveSearchPlaceholder: '查找你的生意伙伴',
+            noneResultsText: '没有查询到相关的信息'
+        });
+        $('.ywxm').nextAll().remove();  // bug
+        $('.ywxm').selectpicker('refresh');
+    }
+</script>
+</body>
+</html>

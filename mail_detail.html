@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>优米云</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/layer/3.1.0/mobile/need/layer.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div>
+            <select class="years tjtselect" name="">
+            </select>
+            <select class="mouths tjtselect" name="">
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <div id="text" style="width:100%;height: 500px;margin: 0 auto"></div>
+        </div>
+    </div>
+</div>
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
+<script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script>
+    var zcdataitem = [];  // 支出数组
+    var srdataitem = []; // 收入数组
+    var myChart = echarts.init(document.getElementById('text'));
+    var getDay = []; // 保存当前的月份的日期
+    var years = 2017;
+    var mouths = 12;
+    $(function () {
+        var date = new Date();
+        var yearoption = date.getFullYear(); // 获取当前年
+        years = yearoption;
+        var mouthiii = date.getMonth() + 1;
+        mouths = mouthiii;
+        for (var m = 0; m < 3; m++) {
+            $('.years').append(`<option value='${yearoption}'>${yearoption}年</option>`);
+            yearoption--;
+        }
+        for (var mm = 1; mm <= 12; mm++) {
+            $('.mouths').append(`<option value='${mm}'>${mm}月</option>`);
+        }
+        $('.years').selectpicker({
+            style: 'btn-white',
+            size: 4
+        });
+        $('.mouths').selectpicker('val',mouths);//  默认 选择 当前月份
+        $('.mouths').selectpicker({
+            style: 'btn-white',
+            size: 6
+        });
+        $('.mouths').selectpicker('refresh');
+        $('.tjtselect').change(function (e) {
+            e.stopPropagation();
+            var yearsss = $('.years').find('option:selected').val();
+            var mouthsss = $('.mouths').find('option:selected').val();
+            years = yearsss;
+            mouths = mouthsss;
+            getDayDate();
+            getDate();
+        });
+        getDayDate();
+        getDate();
+    });
+
+    function getDate() {
+        $.ajax({
+            url: 'http://'+window.location.hostname+':3000/reads/readmouthtjt',
+            dataType: 'json',
+            data: {year: years, mouth: mouths, num: getDay.length},
+            async: false,
+            type: 'get',
+            success: function (res) {
+                if (res.code != 0) {
+                    layer.msg(res.msg);
+                    return false;
+                }
+                zcdataitem.splice(0, zcdataitem.length);
+                srdataitem.splice(0, srdataitem.length);
+                res.data.forEach(function (item) {
+                    if (item.length == 0) { // 收入支出都是空的  向数组里面添加空的数据
+                        zcdataitem.push(0);
+                        srdataitem.push(0);
+                    } else if (item.length > 0) {
+                        item.forEach(function (items) {
+                            if (items._id == 1) {  // 收入
+                                srdataitem.push(items.total);
+                                if (item.length == 1) {
+                                    zcdataitem.push(0);
+                                }
+                            } else {
+                                zcdataitem.push(items.total);
+                                if (item.length == 1) {
+                                    srdataitem.push(0);
+                                }
+                            }
+                        })
+                    }
+                });
+                option = {
+                    title: {
+                        text: '收入/支出'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['收入', '支出']
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            dataZoom: {
+                                yAxisIndex: 'none'
+                            },
+                            dataView: {readOnly: false},
+                            magicType: {type: ['line', 'bar']},
+                            restore: {},
+                            saveAsImage: {}
+                        }
+                    },
+                    calculable: true,
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: getDay
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            name: '收入',
+                            type: 'bar',
+                            data: srdataitem,
+                        },
+                        {
+                            name: '支出',
+                            type: 'bar',
+                            data: zcdataitem,
+                        }
+                    ]
+                };
+                myChart.setOption(option, true);
+            }
+        });
+    }
+
+    function getDayDate() {
+        var num = getMouthNum();
+        getDay.splice(0, getDay.length);
+        for (var k = 1; k <= num; k++) {
+            getDay.push(k);
+        }
+    }
+
+    function getMouthNum() {
+        //构造当前日期对象
+        var date = new Date(years + '-' + mouths);
+        //获取年份
+        var year = date.getFullYear();
+        //获取当前月份
+        var mouth = date.getMonth() + 1;
+        //定义当月的天数；
+        var days;
+        //当月份为二月时，根据闰年还是非闰年判断天数
+        if (mouths == 2) {
+            days = year % 4 == 0 ? 29 : 28;
+        }
+        else if (mouths == 1 || mouths == 3 || mouths == 5 || mouths == 7 || mouths == 8 || mouths == 10 || mouths == 12) {
+            //月份为：1,3,5,7,8,10,12 时，为大月.则天数为31；
+            days = 31;
+        }
+        else {
+            //其他月份，天数为：30.
+            days = 30;
+        }
+        return days;
+    }
+
+</script>
+</body>
+</html>

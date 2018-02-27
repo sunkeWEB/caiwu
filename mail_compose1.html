@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>优米云</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/layer/3.1.0/mobile/need/layer.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div>
+            <select class="selectsztjoptionmm" name=""></select>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <div id="text" style="width:1000px;height: 500px;margin: 0 auto"></div>
+        </div>
+    </div>
+</div>
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
+<script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script>
+    var zcdata = [];  // 支出数组
+    var srdata = []; // 收入数组
+    var myChart = echarts.init(document.getElementById('text'));
+    $(function () {
+        getDate();
+        var date1 = new Date();
+        var yearoption1 = date1.getFullYear(); // 获取当前年
+        for (var m = 0; m < 3; m++) {
+            $('.selectsztjoptionmm').append(`<option value='${yearoption1}'>${yearoption1}年</option>`);
+            yearoption1--;
+        }
+        $('.selectsztjoptionmm').selectpicker({
+            style: 'btn-white',
+            size: 4
+        });
+        $('.selectsztjoptionmm').change(function (e) {
+            e.stopPropagation();
+            srdata.splice(0, srdata.length); //清空数组
+            zcdata.splice(0, zcdata.length); //清空数组
+            var year = $(this).find('option:selected').val(); // 获取年份
+            getDate(year);
+        });
+    });
+    function getDate(year) {
+      var years = new Date().getFullYear();
+      if (year) {
+        var years = year;
+      }
+        $.ajax({
+            url: 'http://'+window.location.hostname+':3000/reads/readyearzctjt',
+            dataType: 'json',
+            data: {years: years},
+            async: false,
+            type: 'get',
+            success: function (res) {
+                if (res.code != 0) {
+                    layer.msg(res.msg);
+                    return false;
+                }
+                zcdata.splice(0, zcdata.length);
+                srdata.splice(0, srdata.length);
+                res.data.forEach(function (item) {
+                    if (item.length == 0) { // 收入支出都是空的  向数组里面添加空的数据
+                        zcdata.push(0);
+                        srdata.push(0);
+                    } else if (item.length > 0) {
+                        item.forEach(function (items) {
+                            if (items._id == 1) {  // 收入
+                                srdata.push(items.total);
+                                if (item.length == 1) {
+                                    zcdata.push(0);
+                                }
+                            } else {
+                                zcdata.push(items.total);
+                                if (item.length == 1) {
+                                    srdata.push(0);
+                                }
+                            }
+                        })
+                    }
+                });
+                option = {
+                    title: {
+                        text: '收入/支出'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['收入', '支出']
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            dataView: {show: true, readOnly: false},
+                            magicType: {show: true, type: ['line', 'bar']},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    calculable: true,
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            name: '收入',
+                            type: 'bar',
+                            data: srdata,
+                        },
+                        {
+                            name: '支出',
+                            type: 'bar',
+                            data: zcdata,
+                        }
+                    ]
+                };
+                myChart.setOption(option, true);
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>优米云</title>
+</head>
+<body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        if ($(window).width() < 1000) {
+            location.href = "./mobile/mobilecw/index.html";
+        } else {
+            location.href = "./login.html";
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+ "apps" : [{
+ "name"        : "app1",
+   "script"      : "bin/www",
+"log_date_format"  : "YYYY-MM-DD HH:mm:SS",
+ "log_file"   : "logs/app1.log",
+"error_file" : "logs/app1-err.log",
+ "out_file"   : "logs/app1-out.log",
+"pid_file"   : "logs/app1.pid",
+"exec_mode"  : "cluster_mode",
+"watch"      :  true
+}]
+ }

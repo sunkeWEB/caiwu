@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>优米云 - 登录</title>
+    <link href="https://cdn.bootcss.com/layer/3.1.0/theme/default/layer.css" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="./css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="./css/animate.css" rel="stylesheet">
+    <link href="./css/style.css?v=4.1.0" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+    <style>
+        .logo-name{
+            margin-bottom: 200px;
+        }
+    </style>
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name"></h1>
+
+            </div>
+            <h3>欢迎使用</h3>
+
+                <div class="form-group">
+                    <input type="text" class="form-control name" placeholder="用户名" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control pwd" placeholder="密码" required="">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b login">登 录</button>
+
+
+                <p class="text-muted text-center"></p>
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="./js/jquery.min.js?v=2.1.4"></script>
+    <script src="./js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+    <script src="./js/plugins/cookies/jquery.cookie.js"></script>
+    <script>
+        $(function () {
+            $('.login').click(function () {
+                var name = $('.name').val();
+                var pwd = $('.pwd').val();
+                var data = {
+                    name:name,
+                    pwd:pwd
+                };
+                $.ajax({
+                    url: 'http://'+window.location.hostname+':3000/users/login',
+                    data: data,
+                    type: 'post',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
+                    dataType: 'json',
+                    success: function (res) {
+                        // console.log(res);
+                        if (res.code != 0) {
+                            layer.msg(res.msg);
+                            return false;
+                        }
+                        $.cookie('username', res.data._id,{
+                            path:'/'
+                        });
+                        location.href = "indexs.html";
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

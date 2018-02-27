@@ -1,0 +1,18 @@
+#pragma autorecover
+#pragma classflags(64)
+
+#pragma namespace("\\\\.\\root\\Microsoft\\Windows\\DesiredStateConfigurationProxy")
+instance of __namespace{ name="MS_409";};
+#pragma namespace("\\\\.\\root\\Microsoft\\Windows\\DesiredStateConfigurationProxy\\MS_409")
+
+[Description("DSC proxy to get resource state from local DSC service."): Amended ToSubclass,AMENDMENT, LOCALE("MS_409")]
+class MSFT_DscProxy
+{
+  [static,
+  Description("Get resource state."): Amended ToSubclass] 
+  uint32 GetResourceState(
+	[in,Octetstring] uint8 ConfigurationData[],
+	[out] boolean state
+  );
+};
+

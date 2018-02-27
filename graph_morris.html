@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>优米云</title>
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <link href="https://cdn.bootcss.com/layer/3.1.0/mobile/need/layer.css" rel="stylesheet">
+    <link rel="stylesheet" href="js/plugins/iCheck/skins/square/blue.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="js/plugins/layDate/laydate/theme/default/laydate.css">
+    <style>
+        .columns button, .dropup button {
+            background-color: white;
+            color: #000;
+        }
+
+        .wrapper-content {
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <!-- Modal 收支流水导出 -->
+    <div class="modal fade" id="myModal181" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel181">信息详情</h4>
+                </div>
+                <div class="modal-body">
+                    <table data-toggle="table" id="kkkkkk">
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 转账 -->
+    <div class="modal fade" id="myModal189" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel189">转账</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" style="display: flex">
+                        <label class="control-label" style="width: 100px">转出账户</label>
+                        <label class="control-label czzh" style="width: 122px;color:red;text-align: left">转出账户</label>
+                    </div>
+                    <div class="form-group" style="display: flex">
+                        <label class="control-label" style="width: 122px">转账时间</label>
+                        <div class="" style="width: 100%">
+                            <input type="text" class="form-control time" placeholder="请选择日期" id="test3">
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: flex">
+                        <label class="control-label" style="width: 122px">转入账户</label>
+                        <div class="" style="width: 100%">
+                            <select class="form-control  zhuanruzh" name="account">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: flex">
+                        <label class="control-label" style="width: 122px">转出金额</label>
+                        <div class="" style="width: 100%">
+                            <input type="number" class="form-control zcprice">
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="display: flex">
+                        <label class="control-label" style="width: 122px">转账备注</label>
+                        <div class="" style="width: 100%">
+                            <input type="text" class="form-control zcsm">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn addzhuanzhang btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 转账流水导出 -->
+    <div class="modal fade" id="myModal190" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel190">信息详情</h4>
+                </div>
+                <div class="modal-body">
+                    <table data-toggle="table" id="ppppp">
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div>
+            <table data-toggle="table" id="table">
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="js/plugins/layDate/laydate/laydate.js"></script>
+
+<!-- Flot -->
+<script src="js/plugins/flot/jquery.flot.js"></script>
+<script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="js/plugins/flot/jquery.flot.spline.js"></script>
+<script src="js/plugins/flot/jquery.flot.resize.js"></script>
+<script src="js/plugins/flot/jquery.flot.pie.js"></script>
+<script src="js/plugins/flot/jquery.flot.symbol.js"></script>
+
+<!-- Peity -->
+<script src="js/plugins/peity/jquery.peity.min.js"></script>
+<script src="js/demo/peity-demo.js"></script>
+
+<!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
+
+
+<!-- jQuery UI -->
+<script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- Jvectormap -->
+<script src="js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+
+<!-- EayPIE -->
+<script src="js/plugins/easypiechart/jquery.easypiechart.js"></script>
+
+<!-- Sparkline -->
+<script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Sparkline demo data  -->
+<script src="js/demo/sparkline-demo.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+<script src="js/plugins/bootstrap-table/tableExport.js"></script>
+<script src="js/plugins/bootstrap-table/export/bootstrap-table-export.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="js/myjquery.js"></script>
+<script>
+    var $table = $('#table');
+    var $table1 = $('#kkkkkk');
+    var $table2 = $('#ppppp');
+    $table1.bootstrapTable({
+        url: '',         //请求后台的URL（*）
+        method: 'get',             //请求方式（*）
+        toolbar: '#toolbar',        //工具按钮用哪个容器
+        pagination: true,                   //是否显示分页（*）
+        cache: true,
+        showColumns: true,
+        striped: true,
+        queryParams: function () {
+            return {}
+        },
+        ajaxOptions: {},
+        contentType: "application/x-www-form-urlencoded", /**支持跨域**/
+        clickToSelect: true,
+        showRefresh: true,                  //是否显示刷新按钮
+        pageList: [5, 10, 15, 20],
+//        showPaginationSwitch: true,       //是否显示选择分页数按钮
+        pageNumber: 1,                       //初始化加载第一页，默认第一页
+        pageSize: 10, //每页的记录行数（*）
+        showExport: true,//显示导出按钮
+        exportDataType: "all", //basic', 'all', 'selected'.
+        exportTypes: ['excel', 'PDF', 'PNG'],
+        exportOptions: {
+            // ignoreColumn: [0],  //忽略某一列的索引
+            fileName: '收支流水',  //文件名称设置
+            worksheetName: 'sheet1',  //表格工作区名称
+            excelstyles: ['background-color', 'color', 'font-size', 'font-weight'],
+            onMsoNumberFormat: $.DoOnMsoNumberFormat
+        },
+        sidePagination: "client", //服务端处理分页
+        columns: [
+            {
+                title: 'pid',
+                field: 'pid',
+                align: 'center',
+                valign: 'middle',
+                visible: false
+            },
+            {
+                title: '时间',
+                field: 'time',
+                align: 'center',
+                valign: 'middle',
+                sortable: true,
+                formatter: function (value) {
+                    return new Date(parseInt(value) * 1000).toLocaleDateString();
+                }
+            }, {
+                title: '类型',
+                field: 'pid',
+                align: 'center',
+                 formatter: function (value, row) {
+                    if (row.pid == 1) {
+                        return "收入"
+                    }else{
+                         return "支出"
+                    }
+                }
+            }, {
+                title: '成员',
+                field: 'czy',
+                align: 'center',
+            }, {
+                title: '帐户',
+                field: 'form',
+                align: 'center',
+            }, {
+                title: '流入',
+                field: 'price',
+                align: 'center',
+                sortable: true,
+                formatter: function (value, row) {
+                    if (row.pid == 1) {
+                        return value
+                    }
+                }
+            }, {
+                title: '流出',
+                field: 'price',
+                align: 'center',
+                sortable: true,
+                formatter: function (value, row) {
+                    if (row.pid == 0) {
+                        return value
+                    }
+                }
+            }, {
+                title: '备注',
+                field: 'sm',
+                align: 'center',
+            }
+        ],
+        // responseHandler: function (res) {
+        //     return {
+        //         // "total": res.total,//总页数
+        //         "rows": res   //数据
+        //     };
+        // },
+    });
+    $table2.bootstrapTable({
+        url: '',         //请求后台的URL（*）
+        method: 'get',             //请求方式（*）
+        toolbar: '#toolbar',        //工具按钮用哪个容器
+        pagination: true,                   //是否显示分页（*）
+        cache: true,
+        showColumns: true,
+        striped: true,
+        queryParams: function () {
+            return {}
+        },
+        ajaxOptions: {},
+        contentType: "application/x-www-form-urlencoded", /**支持跨域**/
+        clickToSelect: true,
+        showRefresh: true,                  //是否显示刷新按钮
+        pageList: [5, 10, 15, 20],
+//        showPaginationSwitch: true,       //是否显示选择分页数按钮
+        pageNumber: 1,                       //初始化加载第一页，默认第一页
+        pageSize: 10, //每页的记录行数（*）
+        showExport: true,//显示导出按钮
+        exportDataType: "all", //basic', 'all', 'selected'.
+        exportTypes: ['excel', 'PDF', 'PNG'],
+        exportOptions: {
+            // ignoreColumn: [0],  //忽略某一列的索引
+            fileName: '转账流水',  //文件名称设置
+            worksheetName: 'sheet1',  //表格工作区名称
+            excelstyles: ['background-color', 'color', 'font-size', 'font-weight'],
+            onMsoNumberFormat: $.DoOnMsoNumberFormat
+        },
+        sidePagination: "client", //服务端处理分页
+        columns: [
+            {
+                title: '时间',
+                field: 'time',
+                align: 'center',
+                valign: 'middle',
+                sortable: true,
+                formatter: function (value) {
+                    return new Date(parseInt(value) * 1000).toLocaleDateString();
+                }
+            },
+            {
+                title: 'pid',
+                field: 'pid',
+                align: 'center',
+                valign: 'middle',
+                visible: false
+            },
+            {
+                title: 'to',
+                field: 'to',
+                align: 'center',
+                valign: 'middle',
+                visible: false
+            }, {
+                title: '类型',
+                align: 'center',
+                valign: 'middle',
+                formatter: function (value, row) {
+
+                    if (row.pid == 1) {
+                        return "<span>转入</span>"
+                    } else {
+                        return "<span>转出</span>"
+                    }
+                }
+            }, {
+                title: '成员',
+                field: 'jzr',
+                align: 'center',
+            }, {
+                title: '帐户',
+                field: 'form',
+                align: 'center',
+                formatter: function (value, row) {
+                    var to = row.to;
+                    return "<span>" + value + "->" + to + "</span>"
+                }
+            }, {
+                title: '流入',
+                field: 'zcprice',
+                align: 'center',
+                sortable: true,
+                formatter: function (value, row) {
+                    if (row.pid == 1) {
+                        return value
+                    }
+                }
+            }, {
+                title: '流出',
+                field: 'zcprice',
+                align: 'center',
+                sortable: true,
+                formatter: function (value, row) {
+                    if (row.pid == 0) {
+                        return value
+                    }
+                }
+            }, {
+                title: '备注',
+                field: 'zcsm',
+                align: 'center',
+            }
+        ]
+    });
+    $table.bootstrapTable({
+        url: 'http://'+window.location.hostname+':3000/reads/readaccountzh',         //请求后台的URL（*）
+        method: 'get',             //请求方式（*）
+        toolbar: '#toolbar',        //工具按钮用哪个容器
+        pagination: true,                   //是否显示分页（*）
+        cache: true,
+        showColumns: true,
+        striped: true,
+        contentType: "application/x-www-form-urlencoded", /**支持跨域**/
+        clickToSelect: true,
+        showRefresh: true,                  //是否显示刷新按钮
+        pageList: [5, 10, 15, 20],
+        pageNumber: 1,                       //初始化加载第一页，默认第一页
+        pageSize: 10, //每页的记录行数（*）
+        search: true,
+        onDblClickRow:function () {
+        },
+        sidePagination: "server", //服务端处理分页
+        columns: [
+            {
+                title: "单号",
+                field: '_id',
+                align: 'center',
+                valign: 'middle',
+                visible: false
+            },
+            {
+                title: '账户名称',
+                field: 'name',
+                align: 'center',
+                valign: 'middle',
+                sortable: true,
+            }, {
+                title: '当前余额',
+                field: 'price',
+                align: 'center',
+                sortable: true,
+            }, {
+                title: '对账/明细',
+                align: 'center',
+                valign: 'middle',
+                sortable: true,
+                formatter: function (value, row) {
+                    var xmpid = row._id;
+                    var names = row.name;
+                    var result2 = parent.quanxianarr.indexOf("账户转账"); //返回index为2
+                    if (result2 == -1) {
+                        return `<button type="button" class="btn btn-info" onclick="exportszls('${xmpid}')" style="color: white">收支流水详情</button>
+                              <button type="button" class="btn btn-info" onclick="yhzzzzls('${xmpid}')" style="color: white">转账流水详情</button>`
+                    }else{
+                        return `<button type="button" class="btn btn-info" onclick="exportszls('${xmpid}')" style="color: white">收支流水详情</button>
+                              <button type="button" class="btn btn-info" onclick="yhzzzzls('${xmpid}')" style="color: white">转账流水详情</button>
+                             <button type="button" class="btn btn-info yhzhzz" onclick="zhuanzhang('${xmpid}','${names}')" style="color: white">转账</button>`
+                    }
+                }
+            }
+        ],
+        responseHandler: function (res) {
+            return {
+                "total": res.total,//总页数
+                "rows": res.data   //数据
+            };
+        },
+    });
+    $(function () {
+        // 时间
+        laydate.render({
+            elem: '#test3', //指定元素mmmlkas
+        });
+        $('.addzhuanzhang').click(function () {
+            var form = $('.czzh').text();
+            var to = $('.zhuanruzh').find('option:selected').val();
+            var time = $('#test3').val();
+            var zcprice = $('.zcprice').val();
+            var zcsm = $('.zcsm').val();
+            var jzr = parent.jzrzcname; // 转账人
+            var data = {
+                form: form,
+                to: to,
+                time: time,
+                zcprice: zcprice,
+                zcsm: zcsm,
+                jzr: jzr
+            };
+            $.ajax({
+                url: 'http://'+window.location.hostname+':3000/dxtypes/addzc',
+                data: data,
+                dataType: 'json',
+                type: 'post',
+                success: function (res) {
+                    if (res.code == 1) {
+                        layer.msg(res.msg);
+                        return false;
+                    }
+                    layer.msg(res.msg);
+                    $('.modal-body input').val('');
+                    $table.bootstrapTable('refresh');
+                    $('#myModal189').modal('hide');
+                }
+            })
+        });
+        quanxiandengji();
+    });
+
+    function exportszls(x) {
+        $table1.bootstrapTable('refreshOptions', {
+            url: 'http://'+window.location.hostname+':3000/reads/readyhzhszls',
+            queryParams: function () {
+                return {
+                    id: x
+                }
+            }
+        });
+        $('#myModal181').modal('show');
+    }
+
+    function zhuanzhang(x, name) {
+        $('.czzh').text(name);
+        var res1 = sendAjax('http://'+window.location.hostname+':3000/reads/readyshb', 'get');
+        if (res1.code != 0) {
+            layer.msg("初始化数据失败");
+            return false;
+        }
+        $('.zhuanruzh  option').remove();
+        res1.yhzh.forEach(function (items) {
+            if (items.name != name) {
+                $('.zhuanruzh').append(`<option value="${items.name}">${items.name}</option>`);
+            }
+        });
+        $('.zhuanruzh').nextAll().remove();  // bug
+        // 银行下拉框
+        $('.zhuanruzh').selectpicker({
+            style: 'btn-white',
+            size: 5,
+        });
+        $('.zhuanruzh').selectpicker('refresh');
+        $('#myModal189').modal('show');
+    }
+
+    function yhzzzzls(x) {
+        $table2.bootstrapTable('refreshOptions', {
+            url: 'http://'+window.location.hostname+':3000/reads/readyhzzzzls',
+            queryParams: function () {
+                return {
+                    id: x
+                }
+            }
+        });
+        $('#myModal190').modal('show');
+    }
+
+    function quanxiandengji() {
+
+        var result2 = parent.quanxianarr.indexOf("账户转账"); //返回index为2
+        // console.log(result2);
+        if (result2 == -1) {
+            // console.log($('.yhzhzz'));
+            $('.yhzhzz').empty();
+        }
+    }
+</script>
+</body>
+
+</html>

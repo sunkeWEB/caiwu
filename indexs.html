@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <title>优米云</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<div id="wrapper">
+    <!--当前登录账号的真实姓名  记账出需要用到-->
+    <input type="hidden" class="jzrzcname">
+    <!--左侧导航开始-->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close"><i class="fa fa-times-circle"></i>
+        </div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <span><img alt="image" class="img-circle" src="img/profile_small.jpg"/></span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                               <span class="block m-t-xs"><strong class="font-bold">优米云</strong></span>
+                        </a>
+                    </div>
+                    <div class="logo-element">优米云
+                    </div>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">日常记账</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" href="index_v1.html" data-index="0">欢迎页</a>
+                        </li>
+                        <li class="authszrzcreate">
+                            <a class="J_menuItem" href="index_v2.html">收入 / 支出记账</a>
+                        </li>
+                        <li class="readszrzcreate">
+                            <a class="J_menuItem" href="index_v3.html">收支流水列表</a>
+                        </li>
+                        <li class="ysyfjjj">
+                            <a class="J_menuItem ysyf" href="index_v4.html">应收 / 应付记账 </a>
+                        </li>
+                        <li class="ysyfjjj">
+                            <a class="J_menuItem ysyf" href="index_v5.html" target="_blank">应收应付流水列表</a>
+                        </li>
+                        <li>
+                            <!--<a class="J_menuItem" href="index_v5.html" target="_blank">借出报销</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<a class="J_menuItem" href="index_v5.html" target="_blank">借入归还</a>-->
+                        </li>
+                    </ul>
+
+                </li>
+                <li class="zjgl">
+                    <a href="#">
+                        <i class="fa fa fa-bar-chart-o"></i>
+                        <span class="nav-label">资金管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <!--<li>-->
+                        <!--<a class="J_menuItem" href="graph_echarts.html">应收款</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                        <!--<a class="J_menuItem" href="graph_flot.html">应付款</a>-->
+                        <!--</li>-->
+                        <li>
+                            <a class="J_menuItem" href="graph_morris.html">资金账户余额</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href=""><i class="fa fa-envelope"></i> <span class="nav-label">报表统计 </span>
+                        <ul class="nav nav-second-level">
+                            <li class="yeartjzzt"><a class="J_menuItem" href="mail_compose1.html">年度收支柱状图</a></li>
+                            <li class="accountzzttj"><a class="J_menuItem" href="mail_compose.html">成员收支柱状图</a></li>
+                            <li class="szgbtjt"><a class="J_menuItem" href="mail_compose2.html">收入购表</a></li>
+                            <li class="szgbtjt"><a class="J_menuItem" href="mail_compose3.html">支出购表</a></li>
+                            <li><a class="J_menuItem" href="mail_compose.html">支出汇总饼状图</a></li>
+                        </ul>
+                <li>
+                    <a href="#"><i class="fa fa-desktop"></i><span class="nav-label">系统设置</span>
+                        <ul class="nav nav-second-level xtzgqx">
+                            <li><a class="J_menuItem" href="contacts.html">账户管理</a>
+                            </li>
+                           <!-- <li><a class="J_menuItem" href="profile.html">账号类型</a>
+                            </li>-->
+                            <li><a class="J_menuItem" href="profile1.html">大类项目</a>
+                            </li>
+                            <li><a class="J_menuItem" href="profile2.html">小类项目</a>
+                            </li>
+                            <li><a class="J_menuItem" href="profile3.html">客户管理</a>
+                            </li>
+                            <li><a class="J_menuItem" href="profile4.html">员工管理</a>
+                            </li>
+                            <li><a class="J_menuItem" href="profile5.html">项目管理</a>
+                            </li>
+                            <li><a class="J_menuItem" href="profile6.html">用户管理</a>
+                            </li>
+                            <!--<li><a class="J_menuItem" href="calendar.html">数据库维护</a>-->
+                            <!--</li>-->
+                            <li class="updatepwds"><a class="J_menuItem" href="updatepwd.html">修改密码</a>
+                            </li>
+                        </ul>
+            </ul>
+        </div>
+    </nav>
+    <!--左侧导航结束-->
+    <!--右侧部分开始-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+        </div>
+        <div class="row content-tabs">
+            <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
+            </button>
+            <nav class="page-tabs J_menuTabs">
+                <div class="page-tabs-content">
+                    <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
+                </div>
+            </nav>
+            <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
+            </button>
+            <div class="btn-group roll-nav roll-right">
+                <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
+
+                </button>
+                <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                    <li class="J_tabShowActive"><a>定位当前选项卡</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
+                    </li>
+                    <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
+                    </li>
+                </ul>
+            </div>
+            <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+        </div>
+        <div class="row J_mainContent" id="content-main">
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="index_v1.html?v=4.0" frameborder="0"
+                    data-id="index_v1.html"></iframe>
+        </div>
+        <!--<div class="footer">-->
+        <!--<div class="pull-right">&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank">zihan's blog</a>-->
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+</div>
+
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="js/plugins/layer/layer.min.js"></script>
+
+<!-- 自定义js -->
+<script src="js/hplus.js?v=4.1.0"></script>
+<script type="text/javascript" src="js/contabs.js"></script>
+
+<!-- 第三方插件 -->
+<script src="js/plugins/pace/pace.min.js"></script>
+<script>
+    var listsrzc, daochu, jzrzcname, jzrid, dengji, quanxianarr = [];
+    $(function () {
+        $.ajax({
+            url: 'http://'+window.location.hostname+':3000/users/auth',
+            type: 'post',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            dataType: 'json',
+            success: function (res) {
+                if (res.data == undefined) {  // 修改页面之后用户回退
+                    location.href = "login.html";
+                }
+                                
+                jzrzcname = res.data[0].zsname;
+                jzrid = res.data[0]._id;
+                dengji = res.data[0].dengji;
+                $('.jzrzcname').val(jzrzcname);
+
+                if (res.data[0].dengji == "普通记账" || res.data[0].dengji == "经理记账") {
+                    $('.xtzgqx > li').not('.updatepwds').remove();
+                }
+                var arr = res.data[0].quanxian;
+                for (item of arr) {
+
+                    quanxianarr.push(item.name);
+                    if (item.name == "收支记账") {
+                        listsrzc = item.list;
+                        if (listsrzc.create != 0) {   // 收支流水列表的 创建
+                            $('.authszrzcreate').remove();
+                        }
+                        if (listsrzc.read != 0) {
+                            $('.readszrzcreate').remove();  // 收支流水列表的 阅读
+                        }
+                    }
+                    else if (item.name == "表格导出") {
+                        daochu = item.list;
+                    }
+                }
+
+                // 如果资金管理没有权限 删除
+                if (quanxianarr.indexOf('资金账户') == -1) {
+                    $('.zjgl').remove();
+                }
+                // var quanxianlistadmin = ["收支记账", "流水修改", "流水删除", "应收应付", "借出报销", "借入归还", "资金账户", "账户转账", "账号对账", "表格导出", "年度统计", "收支曲线", "年柱状图", "成员柱状", "收支构表"];
+
+                if (quanxianarr.indexOf('收支记账') == -1) {
+                    $('.authszrzcreate').remove();
+                }
+
+                if (quanxianarr.indexOf('年度统计') == -1) {
+                    $('.niandutj').remove();
+                }
+
+                if (quanxianarr.indexOf('收支曲线') == -1) {
+                    $('.mouththtj').remove();
+                }
+
+                if (quanxianarr.indexOf('年柱状图') == -1) {
+                    $('.yeartjzzt').remove();
+                }
+
+                if (quanxianarr.indexOf('成员收支柱状图') == -1) {
+                    $('.accountzzttj').remove();
+                }
+
+                if (quanxianarr.indexOf('收支构表') == -1) {
+                    $('.szgbtjt').remove();
+                }
+                if (quanxianarr.indexOf('应收应付') == -1) {
+                    $('.ysyfjjj').remove();
+                }
+
+            }
+        });
+    });
+
+    function jsMethod() {
+        location.href = "login.html";
+    }
+</script>
+</body>
+</html>

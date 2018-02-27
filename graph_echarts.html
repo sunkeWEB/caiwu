@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>优米云</title>
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div>
+            <table data-toggle="table" id="table">
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+
+
+<!-- Flot -->
+<script src="js/plugins/flot/jquery.flot.js"></script>
+<script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="js/plugins/flot/jquery.flot.spline.js"></script>
+<script src="js/plugins/flot/jquery.flot.resize.js"></script>
+<script src="js/plugins/flot/jquery.flot.pie.js"></script>
+<script src="js/plugins/flot/jquery.flot.symbol.js"></script>
+
+<!-- Peity -->
+<script src="js/plugins/peity/jquery.peity.min.js"></script>
+<script src="js/demo/peity-demo.js"></script>
+
+<!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
+
+
+<!-- jQuery UI -->
+<script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- Jvectormap -->
+<script src="js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+
+<!-- EayPIE -->
+<script src="js/plugins/easypiechart/jquery.easypiechart.js"></script>
+
+<!-- Sparkline -->
+<script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Sparkline demo data  -->
+<script src="js/demo/sparkline-demo.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<script>
+    var $table = $('#table');
+    $table.bootstrapTable({
+        url: 'http://'+window.location.host+':3000/picture/read',         //请求后台的URL（*）
+        method: 'get',             //请求方式（*）
+        toolbar: '#toolbar',        //工具按钮用哪个容器
+        pagination: true,                   //是否显示分页（*）
+        cache: true,
+        showColumns: true,
+        striped: true,
+        clickToSelect: true,
+        showRefresh: true,                  //是否显示刷新按钮
+        pageList: [5, 10, 15, 20],
+//        showPaginationSwitch: true,       //是否显示选择分页数按钮
+        pageNumber: 1,                       //初始化加载第一页，默认第一页
+        pageSize: 10, //每页的记录行数（*）
+        search: true,
+        sidePagination: "server", //服务端处理分页
+        columns: [
+            {
+                title: '操作',
+                field: 'dannum',
+                align: 'center',
+                valign: 'middle',
+            },
+            {
+                title: '单号',
+                field: 'create_time',
+                align: 'center',
+                valign: 'middle',
+            },
+            {
+                title: '时间',
+                field: 'create_time',
+                align: 'center',
+                valign: 'middle',
+                sortable: true
+            },
+            {
+                title: '[类型]大类->小类',
+                field: 'create_time',
+                align: 'center',
+                valign: 'middle',
+                sortable: true
+            }, {
+                title: '应收',
+                field: 'inflow',
+                align: 'center',
+                valign: 'middle',
+            },{
+                title: '应付',
+                field: 'flowout',
+                align: 'center',
+                valign: 'middle',
+                sortable: true
+            }
+            ,{
+                title: '期限',
+                field: 'account',
+                align: 'center',
+                valign: 'middle',
+                sortable: true
+            },{
+                title: '生意伙伴',
+                field: 'business',
+                align: 'center',
+                valign: 'middle',
+                sortable: true
+            }
+            ,{
+                title: '业务项目',
+                field: 'ywxms',
+                align: 'center',
+                valign: 'middle',
+                sortable: true
+            }
+            ,{
+                title: '经手人',
+                field: 'handman',
+                align: 'center',
+                valign: 'middle',
+                sortable: true
+            },{
+                title: '说明',
+                field: 'explain',
+                align: 'center',
+                valign: 'middle',
+                sortable: true
+            },{
+                title: '记账人',
+                field: 'bookkeeper',
+                align: 'center',
+                valign: 'middle',
+                sortable: true
+            }
+            ,{
+                title: '审核状态',
+                field: 'auditstatus',
+                align: 'center',
+                valign: 'middle',
+            },{
+                title: '操作',
+                align: 'center',
+                valign: 'middle',
+                sortable: true,
+                formatter: function () {
+                    return `<button type="button" class="btn" onclick="del(this)" style="background-color: salmon;color: white"><i class="glyphicon glyphicon-trash"></i>删除</button>
+                             <button type="button" class="btn" onclick="edit(this)" style="background-color: #1d75b3;color: white"><i class="glyphicon glyphicon-pencil"></i>编辑</button>`
+                }
+            }
+        ],
+        responseHandler: function (res) {
+            return {
+                "total": res.total,//总页数
+                "rows": res.data   //数据
+            };
+        },
+    });
+    $(function () {
+    });
+</script>
+</body>
+
+</html>

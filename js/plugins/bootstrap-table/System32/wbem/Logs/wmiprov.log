@@ -1,0 +1,121 @@
+(Tue Dec 12 11:22:09 2017.80852140) : WDM call returned error: 4200
+(Tue Dec 12 11:22:09 2017.80852140) : ***************************************
+(Tue Dec 12 11:22:09 2017.80852140) : Could not get pointer to binary resource for file:
+(Tue Dec 12 11:22:09 2017.80852156) : C:\Windows\system32\drivers\ndis.sys[MofResourceName](Tue Dec 12 11:22:09 2017.80852156) : 
+(Tue Dec 12 11:22:09 2017.80852156) : ***************************************
+(Tue Dec 12 11:22:09 2017.80852156) : ***************************************
+(Tue Dec 12 11:22:09 2017.80852156) : Could not get pointer to binary resource for file:
+(Tue Dec 12 11:22:09 2017.80852156) : C:\Windows\system32\drivers\zh-CN\ndis.sys.mui[MofResourceName](Tue Dec 12 11:22:09 2017.80852156) : 
+(Tue Dec 12 11:22:09 2017.80852156) : ***************************************
+(Tue Dec 12 11:22:09 2017.80852156) : ***************************************
+(Tue Dec 12 11:22:09 2017.80852156) : Could not get pointer to binary resource for file:
+(Tue Dec 12 11:22:09 2017.80852156) : C:\Windows\System32\drivers\wmiacpi.sys[MofResource](Tue Dec 12 11:22:09 2017.80852156) : 
+(Tue Dec 12 11:22:09 2017.80852156) : ***************************************
+(Tue Dec 12 11:22:09 2017.80852156) : ***************************************
+(Tue Dec 12 11:22:09 2017.80852156) : Could not get pointer to binary resource for file:
+(Tue Dec 12 11:22:09 2017.80852171) : C:\Windows\System32\drivers\rtwlanu.sys[NdisMofResource](Tue Dec 12 11:22:09 2017.80852171) : 
+(Tue Dec 12 11:22:09 2017.80852171) : ***************************************
+(Tue Dec 12 11:22:09 2017.80852218) : WDM call returned error: 4200
+(Tue Dec 12 11:22:09 2017.80852218) : WDM call returned error: 4200
+(Tue Dec 12 11:22:09 2017.80852218) : WDM call returned error: 4200
+(Tue Dec 12 11:22:09 2017.80852218) : WDM call returned error: 4200
+(Tue Dec 12 11:22:09 2017.80852234) : WDM call returned error: 4200
+(Tue Dec 12 11:22:09 2017.80852234) : WDM call returned error: 4200
+(Tue Dec 12 11:22:09 2017.80852234) : WDM call returned error: 4200
+(Tue Dec 12 11:22:09 2017.80852234) : WDM call returned error: 4200
+(Tue Dec 12 16:42:08 2017.100051109) : WDM call returned error: 4200
+(Tue Dec 12 16:42:08 2017.100051109) : ***************************************
+(Tue Dec 12 16:42:08 2017.100051109) : Could not get pointer to binary resource for file:
+(Tue Dec 12 16:42:08 2017.100051109) : C:\Windows\system32\drivers\ndis.sys[MofResourceName](Tue Dec 12 16:42:08 2017.100051109) : 
+(Tue Dec 12 16:42:08 2017.100051109) : ***************************************
+(Tue Dec 12 16:42:08 2017.100051109) : ***************************************
+(Tue Dec 12 16:42:08 2017.100051109) : Could not get pointer to binary resource for file:
+(Tue Dec 12 16:42:08 2017.100051109) : C:\Windows\system32\drivers\zh-CN\ndis.sys.mui[MofResourceName](Tue Dec 12 16:42:08 2017.100051109) : 
+(Tue Dec 12 16:42:08 2017.100051109) : ***************************************
+(Tue Dec 12 16:42:08 2017.100051125) : ***************************************
+(Tue Dec 12 16:42:08 2017.100051125) : Could not get pointer to binary resource for file:
+(Tue Dec 12 16:42:08 2017.100051125) : C:\Windows\System32\drivers\wmiacpi.sys[MofResource](Tue Dec 12 16:42:08 2017.100051125) : 
+(Tue Dec 12 16:42:08 2017.100051125) : ***************************************
+(Tue Dec 12 16:42:08 2017.100051125) : ***************************************
+(Tue Dec 12 16:42:08 2017.100051125) : Could not get pointer to binary resource for file:
+(Tue Dec 12 16:42:08 2017.100051125) : C:\Windows\System32\drivers\rtwlanu.sys[NdisMofResource](Tue Dec 12 16:42:08 2017.100051125) : 
+(Tue Dec 12 16:42:08 2017.100051125) : ***************************************
+(Tue Dec 12 16:42:08 2017.100051171) : WDM call returned error: 4200
+(Tue Dec 12 16:42:08 2017.100051187) : WDM call returned error: 4200
+(Tue Dec 12 16:42:08 2017.100051187) : WDM call returned error: 4200
+(Tue Dec 12 16:42:08 2017.100051187) : WDM call returned error: 4200
+(Tue Dec 12 16:42:08 2017.100051203) : WDM call returned error: 4200
+(Tue Dec 12 16:42:08 2017.100051203) : WDM call returned error: 4200
+(Tue Dec 12 16:42:08 2017.100051203) : WDM call returned error: 4200
+(Tue Dec 12 16:42:08 2017.100051203) : WDM call returned error: 4200
+(Wed Dec 13 09:40:58 2017.4933781) : WDM call returned error: 4200
+(Wed Dec 13 09:40:58 2017.4933781) : ***************************************
+(Wed Dec 13 09:40:58 2017.4933781) : Could not get pointer to binary resource for file:
+(Wed Dec 13 09:40:58 2017.4933781) : C:\Windows\system32\drivers\ndis.sys[MofResourceName](Wed Dec 13 09:40:58 2017.4933796) : 
+(Wed Dec 13 09:40:58 2017.4933796) : ***************************************
+(Wed Dec 13 09:40:58 2017.4933796) : ***************************************
+(Wed Dec 13 09:40:58 2017.4933796) : Could not get pointer to binary resource for file:
+(Wed Dec 13 09:40:58 2017.4933796) : C:\Windows\system32\drivers\zh-CN\ndis.sys.mui[MofResourceName](Wed Dec 13 09:40:58 2017.4933796) : 
+(Wed Dec 13 09:40:58 2017.4933796) : ***************************************
+(Wed Dec 13 09:40:58 2017.4933796) : ***************************************
+(Wed Dec 13 09:40:58 2017.4933796) : Could not get pointer to binary resource for file:
+(Wed Dec 13 09:40:58 2017.4933796) : C:\Windows\System32\drivers\wmiacpi.sys[MofResource](Wed Dec 13 09:40:58 2017.4933796) : 
+(Wed Dec 13 09:40:58 2017.4933796) : ***************************************
+(Wed Dec 13 09:40:58 2017.4933859) : WDM call returned error: 4200
+(Wed Dec 13 09:40:58 2017.4933859) : WDM call returned error: 4200
+(Wed Dec 13 09:40:58 2017.4933875) : WDM call returned error: 4200
+(Wed Dec 13 09:40:58 2017.4933890) : WDM call returned error: 4200
+(Wed Dec 13 09:40:58 2017.4933890) : WDM call returned error: 4200
+(Wed Dec 13 09:40:58 2017.4933890) : WDM call returned error: 4200
+(Wed Dec 13 09:40:58 2017.4933906) : WDM call returned error: 4200
+(Wed Dec 13 09:40:58 2017.4933906) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447265) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447265) : ***************************************
+(Thu Dec 14 09:53:28 2017.1447265) : Could not get pointer to binary resource for file:
+(Thu Dec 14 09:53:28 2017.1447265) : C:\Windows\system32\drivers\ndis.sys[MofResourceName](Thu Dec 14 09:53:28 2017.1447265) : 
+(Thu Dec 14 09:53:28 2017.1447265) : ***************************************
+(Thu Dec 14 09:53:28 2017.1447265) : ***************************************
+(Thu Dec 14 09:53:28 2017.1447265) : Could not get pointer to binary resource for file:
+(Thu Dec 14 09:53:28 2017.1447265) : C:\Windows\system32\drivers\zh-CN\ndis.sys.mui[MofResourceName](Thu Dec 14 09:53:28 2017.1447265) : 
+(Thu Dec 14 09:53:28 2017.1447281) : ***************************************
+(Thu Dec 14 09:53:28 2017.1447281) : ***************************************
+(Thu Dec 14 09:53:28 2017.1447281) : Could not get pointer to binary resource for file:
+(Thu Dec 14 09:53:28 2017.1447281) : C:\Windows\System32\drivers\wmiacpi.sys[MofResource](Thu Dec 14 09:53:28 2017.1447281) : 
+(Thu Dec 14 09:53:28 2017.1447281) : ***************************************
+(Thu Dec 14 09:53:28 2017.1447328) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447328) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447328) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447343) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447343) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447343) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447343) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447359) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447546) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447546) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447546) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447562) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447562) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447562) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447562) : WDM call returned error: 4200
+(Thu Dec 14 09:53:28 2017.1447562) : WDM call returned error: 4200
+(Thu Dec 14 14:11:16 2017.16914890) : WDM call returned error: 4200
+(Thu Dec 14 14:11:16 2017.16914890) : ***************************************
+(Thu Dec 14 14:11:16 2017.16914890) : Could not get pointer to binary resource for file:
+(Thu Dec 14 14:11:16 2017.16914906) : C:\Windows\system32\drivers\ndis.sys[MofResourceName](Thu Dec 14 14:11:16 2017.16914906) : 
+(Thu Dec 14 14:11:16 2017.16914906) : ***************************************
+(Thu Dec 14 14:11:16 2017.16914906) : ***************************************
+(Thu Dec 14 14:11:16 2017.16914906) : Could not get pointer to binary resource for file:
+(Thu Dec 14 14:11:16 2017.16914906) : C:\Windows\system32\drivers\zh-CN\ndis.sys.mui[MofResourceName](Thu Dec 14 14:11:16 2017.16914906) : 
+(Thu Dec 14 14:11:16 2017.16914906) : ***************************************
+(Thu Dec 14 14:11:16 2017.16914906) : ***************************************
+(Thu Dec 14 14:11:16 2017.16914906) : Could not get pointer to binary resource for file:
+(Thu Dec 14 14:11:16 2017.16914906) : C:\Windows\System32\drivers\wmiacpi.sys[MofResource](Thu Dec 14 14:11:16 2017.16914921) : 
+(Thu Dec 14 14:11:16 2017.16914921) : ***************************************
+(Thu Dec 14 14:11:16 2017.16914968) : WDM call returned error: 4200
+(Thu Dec 14 14:11:16 2017.16914968) : WDM call returned error: 4200
+(Thu Dec 14 14:11:16 2017.16914984) : WDM call returned error: 4200
+(Thu Dec 14 14:11:16 2017.16914984) : WDM call returned error: 4200
+(Thu Dec 14 14:11:16 2017.16914984) : WDM call returned error: 4200
+(Thu Dec 14 14:11:16 2017.16915000) : WDM call returned error: 4200
+(Thu Dec 14 14:11:16 2017.16915000) : WDM call returned error: 4200
+(Thu Dec 14 14:11:16 2017.16915000) : WDM call returned error: 4200
