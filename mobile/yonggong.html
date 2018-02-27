@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport">
+    <title>员工管理</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link href="https://cdn.bootcss.com/layer/3.1.0/mobile/need/layer.css" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_547663_1q6qc0ggmv2kpgb9.css">
+    <link rel="stylesheet" href="./public/css/public.css">
+    <!--<link rel="stylesheet" href="./public/css/szls.css">-->
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./public/js/layDate/laydate/theme/default/laydate.css">
+    <style>
+        .lists {
+            padding: 0.5rem;
+        }
+
+        .kh-lists {
+            background-color: white;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+        }
+
+        .kh-lists > div {
+            border-bottom: 1px solid #e9e9e9;
+            padding: 0.3rem 0;
+        }
+
+        .kh-lists i {
+            margin-right: 0.2rem;
+        }
+
+        .cz {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .cz > div {
+            border: 1px solid #ed5a37;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .kh-lists:not(:first-child) {
+            margin-top: 0.7rem;
+        }
+
+        .cz > div:first-child {
+            margin-right: 0.5rem;
+        }
+        .add {
+            padding-right: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group label {
+            width: 4rem;
+            max-width: 100px;
+            text-align: right;
+            margin-right: 1rem;
+        }
+
+        .form-group > div {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel4">员工添加</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">姓名</label>
+                        <div class="">
+                            <input type="text" class="form-control staffname">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">电话</label>
+                        <div class="">
+                            <input type="text" class="form-control staffphone">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">生日</label>
+                        <div class="">
+                            <input type="date" class="form-control staffbir" id="staffbir">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">部门</label>
+                        <div class="">
+                            <input type="text" class="form-control staffnext">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">备注</label>
+                        <div class="">
+                            <input type="text" class="form-control staffbz">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary addstaff">保存</button>
+                    <button type="button" class="btn btn-primary updatestaff" style="display: none;">修改</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="top">
+        <div class="top-name">
+            <div><i class="back iconfont icon-zuobianjiantou"></i></div>
+            <div class="name"><span>员工管理</span></div>
+            <div class="add" data-toggle="modal" data-target="#myModal4">添加</div>
+        </div>
+    </div>
+    <div class="content" style="padding-top: 2.5rem">
+        <div class="lists">
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-box">
+            <div>
+                <a href="index.html">
+                    <div><i class="iconfont icon-home"></i></div>
+                    <div><span>首页</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="main.html">
+                    <div><i class="iconfont icon-jilu1"></i></div>
+                    <div><span>日常记账</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="zjgl.html">
+                    <div><i class="iconfont icon-zijinguanli"></i></div>
+                    <div><span>资金管理</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="user.html" id="tabactive">
+                    <div><i class="iconfont icon-yonghu"></i></div>
+                    <div><span>我的</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="./public/js/layDate/laydate/laydate.js"></script>
+<script src="./public/js/common.js"></script>
+<script src="public/js/jqfz.js"></script>
+<script>
+    var sid;
+    $(function () {
+        $('.back').click(function () {
+            window.history.go(-1);
+        });
+        $('#sel_exportoption').selectpicker({
+            style: 'btn-white',
+            size: 4
+        });
+        load();
+        $('.addstaff').click(function () {
+            updatestaffcre(1);
+        });
+        $('.updatestaff').click(function() {
+            updatestaffcre(0);
+        });
+        laydate.render({
+            elem: '#staffbir' //指定元素
+        });
+    });
+    function load() {
+        $.ajax({
+            url: 'http://' + location.hostname + ':3000/reads/readyuangong',
+            type: 'get',
+            dataType: 'json',
+            data: {order: "asc", offset: 0, limit: 100},
+            success: function (res) {
+                if (res.code === 1) {
+                }
+                var data = res.data;
+                for (var i = 0; i < data.length; i++) {
+                    $('.lists').append(`
+                          <div class="kh-lists">
+                <div class="kh-lists-item">
+                    <div><i class="iconfont icon-character"></i><span>姓名</span> <span>${data[i].name}</span></div>
+                </div>
+                <div>
+                    <div><span><i class="iconfont icon-dianhua"></i>电话</span> <span>${data[i].phone}</span></div>
+                </div>
+                <div class="kh-lists-item">
+                    <div><span><i class="iconfont icon-zuzhibumen"></i>部门</span> <span>${data[i].department}</span></div>
+                </div>
+                <div>
+                    <div><i class="iconfont icon-shengri"></i><span>生日</span> <span>${data[i].birthday}</span></div>
+                </div>
+                <div>
+                    <div><i class="iconfont icon-beizhu"></i><span>备注</span> <span>${data[i].bz}</span></div>
+                </div>
+                <div class="cz">
+                    <div onclick="edit('${data[i].name}','${data[i]._id}','${data[i].phone}','${data[i].department}','${data[i].bz}','${data[i].birthday}')">修改</div>
+                    <div onclick="del('${data[i].name}','${data[i]._id}')">删除</div>
+                </div>
+            </div>
+                    `);
+                }
+            }
+        });
+    }
+
+    function updatestaffcre (types) {
+        var name = $('.staffname').val();
+        var phone = $('.staffphone').val();
+        var bir = $('.staffbir').val();
+        var bz = $('.staffbz').val();
+        var next = $('.staffnext').val();
+        if (name=='') {
+            layer.msg("姓名必须填写");
+            return false;
+        }
+        if (phone=='') {
+            layer.msg("电话必须填写");
+            return false;
+        }
+
+        if (next=='') {
+            layer.msg("部门必须填写");
+            return false;
+        }
+
+        var data = {
+            name: name,
+            birthday: bir,
+            phone: phone,
+            bz: bz,
+            department: next
+        };
+        if (types==1) {
+            $.ajax({
+                url: 'http://'+location.hostname+':3000/dxtypes/addstaff',
+                data: data,
+                type: 'post',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code==1) {
+                        layer.msg(res.msg);
+                        return false;
+                    }
+                    layer.msg(res.msg);
+                    $('.lists').empty();
+                    $('#myModal4').modal('hide');
+                    $('.modal-body input').val('');
+                    load();
+                }
+            });
+        }else{
+            var url = "http://"+location.hostname+":3000/dxtypes/updatestaff";
+            var res = $.updateData(url, sid, data);
+            if (res.code == 1) {
+                layer.msg(res.msg);
+                return false;
+            }
+            layer.msg(res.msg);
+            $('.lists').empty();
+            $('#myModal4').modal('hide');
+            $('.modal-body input').val('');
+            load();
+        }
+    }
+
+    function del (name,id) {
+        layer.confirm('你确定删除 ' + name + ' 嘛？', {
+            btn: ['果断删除', '放弃'] //按钮
+        }, function () {
+            var url = "http://"+location.hostname+":3000/dxtypes/delstaff";
+            var res = $.deletelData(url, id);
+            if (res.code == 1) {
+                layer.msg(res.msg);
+                return false;
+            }
+            $('.lists').empty();
+            layer.msg(res.msg);
+            load();
+        });
+    }
+
+    function edit (name,id,phone,department,bz,birthday) {
+        sid = id;
+        $('.staffname').val(name);
+        $('.staffphone').val(phone);
+        laydate.render({
+            elem: '#staffbir', //指定元素
+            value:birthday
+        });
+        $('.staffbz').val(bz);
+        $('.staffnext').val(department);
+        $('#myModalLabel4').text("员工信息修改");
+        $('#myModal4  .updatestaff').css("display","inline-block");
+        $('#myModal4  .addstaff').css("display","none");
+        $('#myModal4').modal('show');
+    }
+
+    //  这里公用一个modal 修改class
+    $('#myModal4').on('hidden.bs.modal', function (e) {
+        $('#myModalLabel4').text("员工添加");
+        $('#myModal4  .addstaff').css("display","inline-block");
+        $('#myModal4  .updatestaff').css("display","none");
+        $('input').val('');
+    });
+
+</script>
+</body>
+</html>

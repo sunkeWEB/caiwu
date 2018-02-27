@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport">
+    <title>客户管理</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link href="https://cdn.bootcss.com/layer/3.1.0/mobile/need/layer.css" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_547663_uspmw4tonvp1fw29.css">
+    <link rel="stylesheet" href="./public/css/public.css">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <style>
+        .lists {
+            padding: 0.5rem;
+        }
+
+        .kh-lists {
+            background-color: white;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+        }
+
+        .kh-lists > div {
+            border-bottom: 1px solid #e9e9e9;
+            padding: 0.3rem 0;
+        }
+
+        .kh-lists i {
+            margin-right: 0.2rem;
+        }
+
+        .cz {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .cz > div {
+            border: 1px solid #ed5a37;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .kh-lists:not(:first-child) {
+            margin-top: 0.7rem;
+        }
+
+        .cz > div:first-child {
+            margin-right: 0.5rem;
+        }
+
+        .add {
+            padding-right: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group label {
+            width: 3rem;
+            max-width: 100px;
+            text-align: right;
+            margin-right: 1rem;
+        }
+
+        .form-group > div {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel3">添加客户</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">伙伴</label>
+                        <div class="">
+                            <input type="text" class="form-control khname" placeholder="生意伙伴(客户)名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">电话</label>
+                        <div class="">
+                            <input type="text" class="form-control khphone" placeholder="客户电话">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">传真</label>
+                        <div class="">
+                            <input type="text" class="form-control khcz" placeholder="传真">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <div class="">
+                            <input type="text" class="form-control khemail" placeholder="客户电子邮件">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">地址</label>
+                        <div class="">
+                            <input type="text" class="form-control khadders" placeholder="客户地址">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">备注</label>
+                        <div class="">
+                            <input type="text" class="form-control khbz" placeholder="其他说明信息">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary addkh">保存</button>
+                    <button type="button" class="btn btn-primary updatekh" style="display: none">修改</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="top">
+        <div class="top-name">
+            <div><i class="back iconfont icon-zuobianjiantou"></i></div>
+            <div class="name"><span>客户管理</span></div>
+            <div class="add" data-toggle="modal" data-target="#myModal3">添加</div>
+        </div>
+    </div>
+    <div class="content" style="padding-top: 2.5rem">
+        <div class="lists">
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-box">
+            <div>
+                <a href="index.html">
+                    <div><i class="iconfont icon-home"></i></div>
+                    <div><span>首页</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="main.html">
+                    <div><i class="iconfont icon-jilu1"></i></div>
+                    <div><span>日常记账</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="zjgl.html">
+                    <div><i class="iconfont icon-zijinguanli"></i></div>
+                    <div><span>资金管理</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="user.html" id="tabactive">
+                    <div><i class="iconfont icon-yonghu"></i></div>
+                    <div><span>我的</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="./public/js/common.js"></script>
+<script src="public/js/jqfz.js"></script>
+<script>
+    var kehusid;
+    $(function () {
+        $('.back').click(function () {
+            window.history.go(-1);
+        });
+        load();
+        $('.addkh').click(function () {
+            updatecrekehu(1);
+        });
+        $('.updatekh').click(function(){
+            updatecrekehu(0);
+        });
+    });
+
+    function load() {
+        $.ajax({
+            url: 'http://' + location.hostname + ':3000/reads/readkehus',
+            type: 'get',
+            dataType: 'json',
+            data: {order: "asc", offset: 0, limit: 100},
+            success: function (res) {
+                if (res.code === 1) {
+                }
+                var data = res.data;
+                for (var i = 0; i < data.length; i++) {
+                    $('.lists').append(`
+                  <div class="kh-lists">
+                <div class="kh-lists-item">
+                    <div><i class="iconfont icon-character"></i><span>姓名</span> <span>${data[i].name}</span></div>
+                </div>
+                <div>
+                    <div><span><i class="iconfont icon-dianhua"></i>电话</span> <span>${data[i].phone}</span></div>
+                </div>
+                <div class="kh-lists-item">
+                    <div><span><i class="iconfont icon-chuanzhen"></i>传真</span> <span>${data[i].cz}</span></div>
+                </div>
+                <div>
+                    <div><i class="iconfont icon-email"></i><span>email</span> <span>${data[i].email}</span></div>
+                </div>
+                <div>
+                    <div><i class="iconfont icon-email"></i><span>地址</span> <span>${data[i].adders}</span></div>
+                </div>
+                <div>
+                    <div><i class="iconfont icon-beizhu"></i><span>备注</span> <span>${data[i].bz}</span></div>
+                </div>
+                <div class="cz">
+                    <div onclick="edit('${data[i].name}','${data[i]._id}','${data[i].phone}','${data[i].cz}','${data[i].bz}','${data[i].adders}','${data[i].email}')">修改</div>
+                    <div onclick="del('${data[i].name}','${data[i]._id}')" >删除</div>
+                </div>
+            </div>
+                    `);
+                }
+            }
+        });
+    }
+
+    function del(name, id) {
+        layer.confirm('你确定删除 ' + name + ' 嘛？', {
+            btn: ['果断删除', '放弃'] //按钮
+        }, function () {
+            var url = "http://" + location.hostname + ":3000/dxtypes/delkehus";
+            var res = $.deletelData(url, id);
+            if (res.code == 1) {
+                layer.msg(res.msg);
+                return false;
+            }
+            $('.lists').empty();
+            layer.msg(res.msg);
+            load();
+        })
+    }
+
+    function edit(name, id, phone, cz, bz, adders, email) {
+        kehusid = id;
+        $('.khname').val(name);
+        $('.khphone').val(phone);
+        $('.khcz').val(cz);
+        $('.khemail').val(email);
+        $('.khadders').val(adders);
+        $('.khbz').val(bz);
+        $('#myModalLabel3').text("客户资料修改");
+        $('#myModal3  .addkh').css("display", "none");
+        $('#myModal3  .updatekh').css("display", "inline-block");
+        $('#myModal3').modal('show');
+    }
+
+    function updatecrekehu(types) {
+        var name = $('.khname').val();
+        var phone = $('.khphone').val();
+        var cz = $('.khcz').val();
+        var email = $('.khemail').val();
+        var adders = $('.khadders').val();
+        var bz = $('.khbz').val();
+        if (name == '') {
+            layer.msg("客户姓名必须填写");
+            return false;
+        }
+        if (phone == '') {
+            layer.msg("客户电话必须填写");
+            return false;
+        }
+        if (adders == '') {
+            layer.msg("客户地址必须填写");
+            return false;
+        }
+        var data = {
+            name: name,
+            phone: phone,
+            cz: cz,
+            email: email,
+            adders: adders,
+            bz: bz
+        };
+        if (types == 1) {
+            $.ajax({
+                url: 'http://' + location.hostname + ':3000/dxtypes/addkh',
+                data: data,
+                type: 'post',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code == 1) {
+                        layer.msg(res.msg);
+                        return false;
+                    }
+                    layer.msg(res.msg);
+                    $('.lists').empty();
+                    $('#myModal3').modal('hide');
+                    $('.modal-body input').val('');
+                    load();
+                }
+            })
+        } else {
+            var url = "http://"+location.hostname+":3000/dxtypes/updatekefus";
+            var res = $.updateData(url, kehusid, data);
+            if (res.code == 1) {
+                layer.msg(res.msg);
+                return false;
+            }
+            layer.msg(res.msg);
+            $('.lists').empty();
+            $('#myModal3').modal('hide');
+            $('.modal-body input').val('');
+            load();
+        }
+    }
+
+    function edit (name, id, phone,cz,bz,adders,email) {
+        kehusid = id;
+        $('.khname').val(name);
+        $('.khphone').val(phone);
+        $('.khcz').val(cz);
+        $('.khemail').val(email);
+        $('.khadders').val(adders);
+        $('.khbz').val(bz);
+        $('#myModalLabel3').text("客户资料修改");
+        $('#myModal3  .addkh').css("display","none");
+        $('#myModal3  .updatekh').css("display","inline-block");
+        $('#myModal3').modal('show');
+    }
+
+    //  这里公用一个modal 修改class
+    $('#myModal3').on('hidden.bs.modal', function (e) {
+        $('#myModalLabel3').text("客户添加");
+        $('#myModal3  .addkh').css("display","inline-block");
+        $('#myModal3  .updatekh').css("display","none");
+        $('.modal-body input').val('');
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+.sztitle{
+  background-color: white;
+    border-left: 2px solid #ed5a37;
+    padding: 0.6rem 0.6rem;
+}
+.sztitle{
+    margin-top: 0.6rem;
+}
+.szlistimg i{
+    font-size: 2.8rem;
+    margin-left: 15px;
+}
+.szlist{
+    margin-top: 0.6rem;
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+.szlistimg {
+    height: 4.5rem;
+    width: 4.5rem;
+    margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.szlistimg img {
+    width: 100%;
+}
+
+.red {
+    color: #ed5a37;
+}
+
+.green{
+    color: #3cad7b;
+}
+
+.szlistbox {
+    color: #9d9a9b;
+    font-size: 0.8rem;
+}

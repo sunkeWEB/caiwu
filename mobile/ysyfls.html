@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport">
+    <title>应收应付流水</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_547663_zxy9ssh255pl23xr.css">
+    <link rel="stylesheet" href="./public/css/public.css">
+    <link rel="stylesheet" href="./public/css/szls.css">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+</head>
+<body>
+<div>
+    <div class="top">
+        <div class="top-name">
+            <div><i class="back iconfont icon-zuobianjiantou"></i></div>
+            <div class="name"><span>应收应付流水</span></div>
+        </div>
+    </div>
+  <!--   <div class="serchdiv">
+        <button class="serchdivactive">全部</button>
+        <button>收入</button>
+        <Button>支出</Button>
+        <Button>时间</Button>
+    </div> -->
+    <div class="content" style="padding-top:2.5rem">
+        <div class="lists">
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-box">
+            <div>
+                <a href="index.html">
+                    <div><i class="iconfont icon-home"></i></div>
+                    <div><span>首页</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="main.html" id="tabactive">
+                    <div><i class="iconfont icon-jilu1"></i></div>
+                    <div><span>日常记账</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="zjgl.html">
+                    <div><i class="iconfont icon-zijinguanli"></i></div>
+                    <div><span>资金管理</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="user.html">
+                    <div><i class="iconfont icon-yonghu"></i></div>
+                    <div><span>我的</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="public/js/jqfz.js"></script>
+<script src="./public/js/common.js"></script>
+<script>
+    var dengji, id,offset=0;
+    $(function () {
+        $('.back').click(function () {
+            window.history.go(-1);
+        });
+        var res =  $.auth();
+        dengji = res[0].dengji;
+        id= res[0]._id;
+        $('.serchdiv button').click(function () {
+            $(this).siblings().removeClass('serchdivactive');
+            $(this).addClass('serchdivactive');
+        });
+        addLi()
+        $(window).scroll(function () {
+            if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                // alert("滚动条已经到达底部为" + $(document).scrollTop());
+                addLi();
+            }
+        });
+    });
+
+    function addLi() {
+        $.ajax({
+            url: 'http://' + location.hostname + ':3000/reads/readysyf',
+            type: 'get',
+            dataType: 'json',
+            data: {order: "asc", offset: offset, limit: 10, dengji:dengji, id: id},
+            success: function (res) {
+                var data = res.data;
+                for (var i = 0; i < data.length; i++) {
+                    var time = $.formatDate(data[i].jztime);
+                    var skitime = $.formatDate(data[i].sktime);
+                    var price = $.fmoney(data[i].price);
+                    $('.lists').append(`
+ <div class="lists-items">
+                <div class="top-lists-items">
+                    <div><span><i class="iconfont icon-time">记账时间 ${time}</i></span></div>
+                    <!--<div class="right"><span>详情<i class="iconfont icon-you"></i></span></div>-->
+                </div>
+                <div class="body-lists-items">
+                    <div>
+                        <i class="iconfont icon-jiaqileixing"></i> <span>收入</span> : <span> ${data[i].price}</span>
+                    </div>
+                    <div><span><i class="iconfont icon-time">收付时间 ${skitime}</i></span></div>
+                    <div>
+                        <i class="iconfont icon-chongzhijine"></i> <span>收付金额</span> : <span>${data[i].price}</span>
+                    </div>
+                    <div>
+                        <i class="iconfont icon-iconset0291"></i> <span>收付大类</span> : <span>${data[i].ssdtype}</span>
+                    </div>
+                    <div>
+                        <i class="iconfont icon-character"></i> <span>客户</span> : <span>${data[i].yshb}</span>
+                    </div>
+                    <div>
+                        <i class="iconfont icon-xiangmu"></i> <span>项目</span> : <span>${data[i].ywxm}</span>
+                    </div>
+                    <div>
+                        <i class="iconfont icon-renwu201"></i> <span>记账人</span> : <span>${data[i].jzr}</span>
+                    </div>
+                    <div>
+                        <i class="iconfont icon-beizhu"></i> <span>备注</span> : <span>${data[i].sm}</span>
+                    </div>
+
+                </div>
+            </div>
+                     `);
+                    offset++;
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

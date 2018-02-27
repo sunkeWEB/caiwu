@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport">
+    <title>收支流水详情页</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_547663_1q6qc0ggmv2kpgb9.css">
+    <link rel="stylesheet" href="./public/css/public.css">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <style>
+        .szinfos{
+            background-color: white;
+            padding: 0.5rem;
+            margin: 0.5rem;
+        }
+        .szinfos > div {
+            border-bottom: 1px solid #e9e9e9;
+            font-size: 0.9rem;
+            padding: 0.2rem 0;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="top">
+        <div class="top-name">
+            <div><i class="back iconfont icon-zuobianjiantou"></i></div>
+            <div class="name"><span>收支流水</span></div>
+        </div>
+    </div>
+    <div class="content" style="padding-top:2.5rem">
+        <div class="lists">
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-box">
+            <div>
+                <a href="index.html">
+                    <div><i class="iconfont icon-home"></i></div>
+                    <div><span>首页</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="main.html">
+                    <div><i class="iconfont icon-jilu1"></i></div>
+                    <div><span>日常记账</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="#" id="tabactive">
+                    <div><i class="iconfont icon-zijinguanli"></i></div>
+                    <div><span>资金管理</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="user.html">
+                    <div><i class="iconfont icon-yonghu"></i></div>
+                    <div><span>我的</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="./public/js/common.js"></script>
+<script src="public/js/jqfz.js"></script>
+<script>
+    var id = location.search.substr(4);
+    $(function () {
+        $('.back').click(function () {
+            window.history.go(-1);
+        });
+        $.ajax({
+            url: 'http://' + location.hostname + ':3000/reads/readyhzhszls',
+            type: 'get',
+            dataType: 'json',
+            data: {id:id},
+            success: function (res) {
+                if (res.code === 1) {
+                }
+                var data = res.data;
+                console.log(data);
+                for (var i=0;i<data.length;i++) {
+                    var date = $.formatDate(data[i].time);
+                    var type = data[i].pid === 1 ? "收入" : "支出";
+                    var price = '￥'+$.fmoney(data[i].price);
+                    $('.lists').append(`
+  <div class="szinfos">
+                <div>
+                    <span><i class="iconfont icon-time"></i><span>${date}</span></span>
+                </div>
+                <div>
+                    <span><i class="iconfont icon-character"></i><span>${data[i].czy}</span></span>
+                    <span><i class="iconfont icon-jiaqileixing"></i><span>${type}</span></span>
+                    <span><i class="iconfont icon-iconset0291"></i><span>${data[i].form}</span></span>
+                </div>
+                <div>
+                    <span><i class="iconfont icon-shouruqingkuang"></i>收入:<span>${data[i].pid === 1 ? price:'￥0.00'}</span></span>
+                    <span><i class="iconfont icon-zhichuqingkuang"></i>支出:<span>${data[i].pid === 0 ? price:'￥0.00'}</span></span>
+                </div>
+                <div>
+                    <span><i class="iconfont icon-beizhu"></i>备注:<span>${data[i].sm}</span></span>
+                </div>
+            </div>
+                `);
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

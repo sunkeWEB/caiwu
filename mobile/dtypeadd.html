@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport">
+    <title>大类管理</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_547663_zxy9ssh255pl23xr.css">
+    <link rel="stylesheet" href="./public/css/public.css">
+    <link rel="stylesheet" href="./public/css/szls.css">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/layer/3.1.0/mobile/need/layer.css" rel="stylesheet">
+    <style>
+        .lists {
+            padding: 0.5rem;
+        }
+
+        .footer-lists-items {
+            border-top: 1px solid #e9e9e9;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .footer-lists-items > div {
+            border: 1px solid #e9e9e9;
+            font-size: 0.8rem;
+            padding: 0.4rem 0.8rem;
+            text-align: right;
+            margin-top: 0.5rem;
+        }
+
+        .modal-body .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .modal-body .form-group label {
+            width: 5rem;
+            max-width: 80px;
+            text-align: center;
+        }
+
+        .modal-body .form-group > div {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="modal fade" id="myModa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">添加大类</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group mmmmmm">
+                        <label class="col-sm-10 control-label">类型</label>
+                        <div class="">
+                            <select class="form-control m-b srzcoptions" name="account">
+                                <option value="1">收入</option>
+                                <option value="0">支出</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-10 control-label">名称</label>
+                        <div class="">
+                            <input type="text" class="form-control name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-10 control-label">说明</label>
+                        <div class="">
+                            <input type="text" class="form-control sm">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary d">保存</button>
+                    <button type="button" class="btn btn-primary ddd" style="display: none">修改</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="top">
+        <div class="top-name">
+            <div><i class="back iconfont icon-zuobianjiantou"></i></div>
+            <div class="name"><span>大类管理</span></div>
+            <div data-toggle="modal" data-target="#myModa" style="padding-right: 1rem">添加</div>
+        </div>
+    </div>
+    <div class="serchdiv">
+        <button class="serchdivactive">全部</button>
+        <button>收入</button>
+        <Button>支出</Button>
+    </div>
+    <div class="content" style="padding-top: 5.1rem">
+        <div class="lists">
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-box">
+            <div>
+                <a href="index.html">
+                    <div><i class="iconfont icon-home"></i></div>
+                    <div><span>首页</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="main.html">
+                    <div><i class="iconfont icon-jilu1"></i></div>
+                    <div><span>日常记账</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="zjgl.html">
+                    <div><i class="iconfont icon-zijinguanli"></i></div>
+                    <div><span>资金管理</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="user.html" id="tabactive">
+                    <div><i class="iconfont icon-yonghu"></i></div>
+                    <div><span>我的</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+<script src="./public/js/common.js"></script>
+<script src="public/js/jqfz.js"></script>
+<script>
+    var dtypespis;  // 删除的时候保存的id
+    $(function () {
+        $.auth();
+        $('.back').click(function () {
+            window.history.go(-1);
+        });
+        $('.serchdiv button').click(function () {
+            $(this).siblings().removeClass('serchdivactive');
+            $(this).addClass('serchdivactive');
+        });
+        load('all');
+        $('.d').click(function () {
+            updatecre(1);
+        });
+        $('.ddd').click(function(){
+            updatecre(0);
+        });
+    });
+
+    function load(search) {
+        $.ajax({
+            url: 'http://' + location.hostname + ':3000/reads/readtype',
+            type: 'get',
+            dataType: 'json',
+            data: {order: "asc", offset: 0, limit: 100},
+            success: function (res) {
+                if (res.code === 1) {
+                }
+                var data = res.data;
+                for (var i = 0; i < data.length; i++) {
+                    $('.lists').append(`
+                         <div class="lists-items">
+                <div class="top-lists-items">
+                    <div><span><i class="iconfont icon-xiangmu"> ${data[i].name}</i></span></div>
+                    <div class="right"><span style="font-size: 0.8rem">${data[i].type === '1' ? '收入' : '支出'}</span></div>
+                </div>
+                <div class="body-lists-items">
+                    <div style="padding: 0.5rem 0">
+                        <i class="iconfont icon-beizhu"></i> <span>备注</span> : <span>${data[i].sm}</span>
+                    </div>
+                    <div class="footer-lists-items">
+                        <div onclick="edit('${data[i].name}','${data[i]._id}','${data[i].sm}')">修改</div>
+                        <div onclick="del('${data[i].name}','${data[i]._id}')">删除</div>
+                    </div>
+                </div>
+            </div>
+                    `);
+                }
+            }
+        });
+    }
+
+    function del(name, id) {
+        layer.confirm('你确定删除 ' + name + ' 这一项记录嘛？', {
+            btn: ['果断删除', '放弃'] //按钮
+        }, function () {
+            var url = "http://" + location.hostname + ":3000/dxtypes/deldtype";
+            var res = $.deletelData(url, id);
+            if (res.code == 1) {
+                layer.msg(res.msg);
+                return false;
+            }
+            $('.lists').empty();
+            layer.msg(res.msg);
+            load();
+        })
+    }
+
+    function updatecre(types) {
+        var type = $('.srzcoptions').find('option:selected').val();
+        var name = $('.name').val();
+        var sm = $('.sm').val();
+        if (type == '') {
+            layer.msg("收入支出不能为空");
+            return false;
+        }
+        if (name == '') {
+            layer.msg("大类名称不能为空");
+            return false;
+        }
+        if (types == 1) {
+            var data = {
+                type: type,
+                name: name,
+                sm: sm
+            };
+            $.ajax({
+                url: 'http://' + location.hostname + ':3000/dxtypes/addTypes',
+                data: data,
+                type: 'post',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code == 1) {
+                        layer.msg(res.msg);
+                        return false;
+                    }
+                    $('.lists').empty();
+                    layer.msg(res.msg);
+                    $('#myModa').modal('hide');
+                    $('.modal-body input').val('');
+                    load();
+                }
+            });
+        }
+        else {
+            var data = {
+                name: name,
+                sm: sm
+            };
+            var url = "http://" + location.hostname + ":3000/dxtypes/updatetype";
+            var res = $.updateData(url, dtypespis, data);
+            if (res.code == 1) {
+                layer.msg(res.msg);
+                return false;
+            }
+            $('.lists').empty();
+            layer.msg(res.msg);
+            $('#myModa').modal('hide');
+            $('.modal-body input').val('');
+            load();
+        }
+    }
+
+    function edit (name, id, sm) {
+        dtypespis = id;
+        $('.name').val(name);
+        $('.sm').val(sm);
+        $('.mmmmmm').css('display','none');
+        $('#myModalLabel').text("大类修改");
+        $('#myModa  .d').css("display","none");
+        $('#myModa  .ddd').css("display","inline-block");
+        $('#myModa').modal('show');
+    }
+
+    //  这里公用一个modal 修改class
+    $('#myModa').on('hidden.bs.modal', function (e) {
+        $('#myModalLabel').text("大类添加");
+        $('.mmmmmm').css('display','flex');
+        $('#myModal5  .d').css("display","inline-block");
+        $('#myModal5  .ddd').css("display","none");
+        $('.name').val('');
+        $('.sm').val('');
+    });
+
+</script>
+</body>
+</html>

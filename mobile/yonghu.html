@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport">
+    <title>用户管理</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link href="https://cdn.bootcss.com/layer/3.1.0/mobile/need/layer.css" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_547663_uspmw4tonvp1fw29.css">
+    <link rel="stylesheet" href="./public/css/public.css">
+    <link link rel="stylesheet" href="public/js/iCheck/skins/square/blue.css">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <style>
+        .lists{
+            padding: 0.5rem;
+        }
+        .kh-lists{
+            background-color: white;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+        }
+        .kh-lists > div {
+            border-bottom: 1px solid #e9e9e9;
+            padding:0.3rem 0;
+        }
+        .kh-lists i {
+            margin-right: 0.2rem;
+        }
+        .cz{
+            display: flex;
+            justify-content: flex-end;
+        }
+        .cz > div {
+            border: 1px solid #ed5a37;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+        }
+        .kh-lists:not(:first-child) {
+            margin-top: 0.7rem;
+        }
+        .cz > div:first-child{
+            margin-right: 0.5rem;
+        }
+        .add {
+            padding-right: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel7">用户添加</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group" >
+                        <label class="control-label" style="width: 122px">登录名</label>
+                        <div class="" style="width: 100%;">
+                            <input type="text" class="form-control username" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group" >
+                        <label class="control-label" style="width: 122px">真实名</label>
+                        <div class="" style="width: 100%;">
+                            <input type="text" class="form-control userzsname" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group useravatarform" >
+                        <label class="col-sm-2 control-label" style="width: 115px">头像图片</label>
+                        <div class="" style="width: 100%;">
+                            <input type="text" class="form-control useravatar" required>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" >
+                        <label class="control-label" style="width: 100px">默认资金账户</label>
+                        <div class="" style="flex: 1">
+                            <select class="userdefaultzh" name="" data-width="100%" data-live-search="true">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" >
+                        <label class="col-sm-2 control-label" style="width: 100px">默认客户</label>
+                        <div class="" style="flex: 1">
+                            <select class="useraccount" name="" data-width="100%" data-live-search="true">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" >
+                        <label class="control-label" style="width: 100px">默认项目</label>
+                        <div class="" style="flex: 1">
+                            <select class="userxm" name="" data-width="100%" data-live-search="true">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group pwdkk" >
+                        <label class="col-sm-2 control-label" style="width: 115px">密码</label>
+                        <div class="" style="width: 100%;">
+                            <input type="password" class="form-control userpwd" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group pwdkk" >
+                        <label class="col-sm-2 control-label" style="width: 115px">确认密码</label>
+                        <div class="" style="width: 100%;">
+                            <input type="password" class="form-control userreqpwd" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="width: 112px">用户级别</label>
+                        <div class="km">
+                            <input class="yhdj" name="kk" id="xtgls" value="系统管理" type="radio"
+                                   title="拥有全部用户数据管理和系统设置"><label for="xtgls">系统管理</label>
+                            <input class="yhdj" name="kk" value="经理记账" type="radio" id="jljzs"
+                                   title="拥有全用户数据管理权不包括系统设置"><label for="jljzs">经理记账</label>
+                            <input class="yhdj" name="kk" checked="checked" value="普通记账" id="ptjzs" type="radio"
+                                   title="只拥有自己数据的管理权"><label for="ptjzs">普通记账</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label quanxianlabel" style="width: 112px">权限</label>
+                        <div class="quanxian km">
+                            <input checked="checked" value="收支记账" id="szjz" type="checkbox"><label
+                                for="ptjzs">收支记账</label>
+                            <input checked="checked" value="流水修改" id="slxg" type="checkbox"><label
+                                for="slxg">流水修改</label>
+                            <input checked="checked" value="流水删除" id="slsc" type="checkbox"><label
+                                for="slsc">流水删除</label>
+                            <br/>
+                            <input checked="checked" value="应收应付" id="ysyf" type="checkbox"><label
+                                for="ysyf">应收应付</label>
+                            <input checked="checked" value="借出报销" id="jcbx" type="checkbox"><label
+                                for="jcbx">借出报销</label>
+                            <input checked="checked" value="借入归还" id="jrgh" type="checkbox"><label
+                                for="jrgh">借入归还</label><br/>
+                            <input checked="checked" value="资金账户" id="zjzh" type="checkbox"><label
+                                for="zjzh">资金账户</label>
+                            <input checked="checked" value="账户转账" id="zhzz" type="checkbox"><label
+                                for="zhzz">账户转账</label>
+                            <input checked="checked" value="账号对账" id="zhdz" type="checkbox"><label
+                                for="zhdz">账号对账</label><br/>
+                            <input checked="checked" value="表格导出" id="daochu" type="checkbox"><label
+                                for="daochu">表格导出</label>
+                            <input checked="checked" value="年度统计" id="yeartj" type="checkbox"><label
+                                for="yeartj">年度统计</label>
+                            <input checked="checked" value="收支曲线" id="szqx" type="checkbox"><label
+                                for="szqx">收支曲线</label><br/>
+                            <input checked="checked" value="年柱状图" id="nzzt" type="checkbox"><label
+                                for="nzzt">年柱状图</label>
+                            <input checked="checked" value="成员柱状" id="cyzz" type="checkbox"><label
+                                for="cyzz">成员柱状</label>
+                            <input checked="checked" value="收支构表" id="szgb" type="checkbox"><label
+                                for="szgb">收支构表</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary addusers" id="addusers">添加</button>
+                    <button type="button" class="btn btn-primary updateusers" style="display: none">修改</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="top">
+        <div class="top-name">
+            <div><i class="back iconfont icon-zuobianjiantou"></i></div>
+            <div class="name"><span>用户管理</span></div>
+            <div class="add" data-toggle="modal" data-target="#myModal7">添加</div>
+        </div>
+    </div>
+    <div class="content" style="padding-top: 2.5rem">
+        <div class="lists">
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-box">
+            <div>
+                <a href="index.html">
+                    <div><i class="iconfont icon-home"></i></div>
+                    <div><span>首页</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="main.html">
+                    <div><i class="iconfont icon-jilu1"></i></div>
+                    <div><span>日常记账</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="zjgl.html">
+                    <div><i class="iconfont icon-zijinguanli"></i></div>
+                    <div><span>资金管理</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="user.html" id="tabactive">
+                    <div><i class="iconfont icon-yonghu"></i></div>
+                    <div><span>我的</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="public/js/iCheck/icheck.min.js"></script>
+<script  src="public/js/layDate/laydate/laydate.js"></script>
+<script src="./public/js/common.js"></script>
+<script src="public/js/jqfz.js"></script>
+<script>
+    var usersid;
+    var arrquanx = ['szjz', 'slxg', 'slsc', 'ysyf', 'jcbx', 'jrgh', 'zjzh', 'zhzz', 'zhdz', 'daochu', 'yeartj', 'nzzt','szqx', 'cyzz', 'szgb', 'szgb'];
+    $(function () {
+        $('.back').click(function () {
+            window.history.go(-1);
+        });
+        load();
+        $('#myModal7 input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '15%' // optional
+        });
+
+        $('#sel_exportoption').selectpicker({
+            style: 'btn-white',
+            size: 4
+        });
+        $('.addusers').click(function () {
+            createUpdateuser(1);
+        });
+
+        $('.updateusers').click(function () {
+            createUpdateuser(0);
+        });
+        getFate();
+    });
+    function load() {
+        $.ajax({
+            url: 'http://' + location.hostname + ':3000/reads/readusers',
+            type: 'get',
+            dataType: 'json',
+            data: {order: "asc", offset: 0, limit: 100},
+            success: function (res) {
+                if (res.code === 1) {
+                }
+                var data = res.data;
+                for (var i = 0; i < data.length; i++) {
+                    $('.lists').append(`
+                   <div class="kh-lists">
+                <div class="kh-lists-item">
+                    <div><i class="iconfont icon-character"></i><span>姓名</span> <span>${data[i].zsname}</span></div>
+                </div>
+                <div class="kh-lists-item">
+                    <div><i class="iconfont icon-character"></i><span>昵称</span> <span>${data[i].name}</span></div>
+                </div>
+                <div>
+                    <div><i class="iconfont icon-beizhu"></i><span>级别</span> <span>${data[i].dengji}</span></div>
+                </div>
+                <div class="cz">
+                    <div onclick="edit('${data[i].name}','${data[i]._id}')">修改</div>
+                    <div onclick="del('${data[i].name}','${data[i]._id}')">删除</div>
+                </div>
+            </div>
+                    `);
+                }
+            }
+        });
+    }
+
+    function createUpdateuser(types) {
+        var name = $('.username').val(); // 登录名
+        var zsname = $('.userzsname').val(); // 真实姓名
+        var avatar = $('.useravatar').val(); // 用户头像
+        var zjzh = $('.userdefaultzh').find('option:selected').text(); // 默认资金账户
+        var xm = $('.userxm').find('option:selected').text(); // 默认项目
+        var account = $('.useraccount').find('option:selected').text(); // 默认客户
+        var pwd = $('.userpwd').val(); // 登录密码
+        var repwd = $('.userreqpwd').val(); // 登录确认密码
+        var dengji = $('input[name="kk"]:checked').val(); // 用户级别
+        var quanxian = '';
+        if (name=='') {
+            layer.msg("登录名必须填写");
+            return false;
+        }
+        if (zsname=='') {
+            layer.msg("真实姓名必须填写");
+            return false;
+        }
+        if (zjzh=='') {
+            layer.msg("资金账户必须填写");
+            return false;
+        }
+        if (account=='') {
+            layer.msg("默认客户必须填写");
+            return false;
+        }
+        if (xm=='') {
+            layer.msg("默认项目必须填写");
+            return false;
+        }
+        for (var i = 0; i < arrquanx.length - 1; i++) {
+            if ($("#" + arrquanx[i]).is(':checked')) {
+                quanxian += $("#" + arrquanx[i]).val() + " ";
+            }
+        }
+        if(types==1) {
+            console.log(dengji);
+            console.log(quanxian);
+            if (pwd != repwd) {
+                layer.msg("密码和确认密码不相等");
+                return false;
+            }
+            if (avatar == '') {
+                layer.msg("用户头像不能为空");
+                return false;
+            }
+            var data = {
+                name: name,
+                zsname: zsname,
+                avatar: avatar,
+                defaultyhk: zjzh,
+                pwd: pwd,
+                account:account,
+                defaultxm: xm,
+                dengji: dengji,
+                quanxian: quanxian
+            };
+            $.ajax({
+                url: 'http://'+location.hostname+':3000/users/register1',
+                type: 'post',
+                data: data,
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code == 1) {
+                        layer.msg(res.msg);
+                        return false;
+                    }
+                    $('.lists').empty();
+                    layer.msg(res.msg);
+                    $('#myModal7').modal('hide');
+                    $('input[type="text"],input[type="password"]').val('');
+                    load();
+                }
+            });
+        }else{
+            var data = {
+                sid:usersid,
+                name: name,
+                zsname: zsname,
+                defaultyhk: zjzh,
+                defaultxm: xm,
+                dengji: dengji,
+                quanxian: quanxian,
+                account:account
+            };
+            $.ajax({
+                url: 'http://'+location.hostname+':3000/dxtypes/updateusers',
+                type: 'post',
+                data: data,
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code == 1) {
+                        layer.msg(res.msg);
+                        return false;
+                    }
+                    $('.lists').empty();
+                    layer.msg(res.msg);
+                    $('#myModal7').modal('hide');
+                    $('input[type="text"],input[type="password"]').val('');
+                    load();
+                }
+            });
+        }
+    }
+
+    function del(name, id) {
+        layer.confirm('你确定删除 ' + name + ' 嘛？', {
+            btn: ['果断删除', '放弃'] //按钮
+        }, function () {
+            var url = "http://"+location.hostname+":3000/dxtypes/delusers";
+            var res = $.deletelData(url, id);
+            if (res.code == 1) {
+                layer.msg(res.msg);
+                return false;
+            }
+            $('.lists').empty();
+            layer.msg(res.msg);
+            load();
+        });
+    }
+
+    function edit(name, id) {
+        usersid = id;
+        $('#myModalLabel7').text("用户信息修改");
+        $('.useravatarform').css('display','none');
+        $('.pwdkk').css('display','none');
+        var url = "http://"+location.hostname+":3000/reads/readusers";
+        var res = $.readData(url, id);
+        if (res.code != 0) {
+            layer.msg(res.msg);
+            return false
+        }
+        var lists = res.data[0];
+        $('.username').val(lists.name); // 登录名
+        $('.userzsname').val(lists.zsname); // 真实姓名
+        $('.userdefaultzh').selectpicker('val', lists.defaultyhk);
+        $('.userxm').selectpicker('val', lists.defaultxm);
+        $('.useraccount').selectpicker('val',lists.defaultkhs);
+        var items = lists.quanxian;
+        $('input').iCheck('uncheck');// 设置全部不选择
+        switch (lists.dengji) {
+            case '系统管理':
+                $("#xtgls").iCheck('check');
+                break;
+            case '经理记账':
+                $("#jljzs").iCheck('check');
+                break;
+            default:
+                $("#ptjzs").iCheck('check');
+        }
+        for (var k = 0; k < items.length; k++) {
+            switch (items[k].name) {
+                case "收支记账":
+                    $('#szjz').iCheck('check');
+                    break;
+                case "流水修改" :
+                    $('#slxg').iCheck('check');
+                    break;
+                case "流水删除":
+                    $('#slsc').iCheck('check');
+                    break;
+                case "应收应付" :
+                    $('#ysyf').iCheck('check');
+                    break;
+                case "借出报销":
+                    $('#jcbx').iCheck('check');
+                    break;
+                case "借入归还" :
+                    $('#jrgh').iCheck('check');
+                    break;
+                case "资金账户":
+                    $('#zjzh').iCheck('check');
+                    break;
+                case "账户转账":
+                    $('#zhzz').iCheck('check');
+                    break;
+                case "账号对账":
+                    $('#zhdz').iCheck('check');
+                    break;
+                case "表格导出":
+                    $('#daochu').iCheck('check');
+                    break;
+                case "年度统计":
+                    $('#yeartj').iCheck('check');
+                    break;
+                case "收支曲线" :
+                    $('#szqx').iCheck('check');
+                    break;
+                case "年柱状图":
+                    $('#nzzt').iCheck('check');
+                    break;
+                case "成员柱状" :
+                    $('#cyzz').iCheck('check');
+                    break;
+                case "收支构表" :
+                    $('#szgb').iCheck('check');
+                    break;
+            }
+        }
+
+        $('#myModal7  #addusers').css("display","none");
+        $('#myModal7  .updateusers').css("display","inline-block");
+        $('#myModal7').modal('show');
+    }
+
+    //  这里公用一个modal 修改class
+    $('#myModal7').on('hidden.bs.modal', function (e) {
+        $('#myModalLabel7').text("用户添加");
+        $('.useravatarform').css('display','flex');
+        $('.pwdkk').css('display','flex');
+        $('#myModal7  #addusers').css("display","inline-block");
+        $('#myModal7  .updateusers').css("display","none");
+        $('input[type="text"],input[type="password"]').val('');
+    });
+    function getFate() {
+        $.ajax({
+            url: 'http://' + location.hostname + ':3000/reads/readyshb',
+            type: 'get',
+            dataType: 'json',
+            success: function (res1) {
+                if (res1.code != 0) {
+                    layer.msg("初始化数据失败");
+                    return false;
+                }
+                $('.syhb option').remove();
+                $('.ywxm option').remove();
+                $('.syhb option').remove();
+                //业务项目
+                res1.gcxm.forEach(function (items) {
+                    $('.userxm').append(`<option value="${items.name}">${items.name}</option>`);
+                });
+                res1.yshb.forEach(function (items) {
+                    $('.useraccount').append(`<option value="${items.name}">${items.name}</option>`);
+                });
+
+                res1.yhzh.forEach(function (items) {
+                    $('.userdefaultzh').append(`<option value="${items.name}">${items.name}</option>`);
+                });
+                $('.userdefaultzh').selectpicker({
+                    style: 'btn-white',
+                    size: 4
+                });
+                $('.userxm').selectpicker({
+                    style: 'btn-white',
+                    size: 4,
+                    liveSearchPlaceholder: '查找你的项目',
+                    noneResultsText: '没有查询到相关的信息'
+                });
+                $('.useraccount').selectpicker({
+                    style: 'btn-white',
+                    size: 4
+                });
+
+                $('.ywxm').selectpicker({
+                    style: 'btn-white',
+                    size: 5,
+                    liveSearchPlaceholder: '查找你的生意伙伴',
+                    noneResultsText: '没有查询到相关的信息'
+                });
+                $('.ywxm').nextAll().remove();  // bug
+                $('.ywxm').selectpicker('refresh');
+                $('.syhb').selectpicker({
+                    style: 'btn-white',
+                    size: 5,
+                    liveSearchPlaceholder: '查找你的生意伙伴',
+                    noneResultsText: '没有查询到相关的信息'
+                });
+                $('.syhb').nextAll().remove();  // bug
+                $('.syhb').selectpicker('refresh');
+            }
+        });
+    }
+</script>
+</body>
+</html>

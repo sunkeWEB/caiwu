@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport">
+    <title>收支流水</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_547663_lhtnrrwsaq2p4x6r.css">
+    <link rel="stylesheet" href="./public/css/public.css">
+    <link rel="stylesheet" href="./public/css/zjgl.css">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+</head>
+<body>
+<div>
+    <div class="top">
+        <div class="top-name">
+            <div><i class="back iconfont icon-zuobianjiantou"></i></div>
+            <div class="name"><span>收支流水</span></div>
+        </div>
+    </div>
+    <div class="content" style="padding-top:2.5rem">
+        <div class="lists">
+        </div>
+    </div>
+    <div class="zzcz">
+        转账
+    </div>
+    <div class="footer">
+        <div class="footer-box">
+            <div>
+                <a href="index.html">
+                    <div><i class="iconfont icon-home"></i></div>
+                    <div><span>首页</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="main.html">
+                    <div><i class="iconfont icon-jilu1"></i></div>
+                    <div><span>日常记账</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="#" id="tabactive">
+                    <div><i class="iconfont icon-zijinguanli"></i></div>
+                    <div><span>资金管理</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="user.html">
+                    <div><i class="iconfont icon-yonghu"></i></div>
+                    <div><span>我的</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="./public/js/common.js"></script>
+<script src="public/js/jqfz.js"></script>
+<script>
+    $(function () {
+        $('.back').click(function () {
+            window.history.go(-1);
+        });
+        $('.serchdiv button').click(function () {
+            $(this).siblings().removeClass('serchdivactive');
+            $(this).addClass('serchdivactive');
+        });
+        $('.zjzh').click(function () {
+            $(this).siblings().removeClass('active');
+            $(this).toggleClass('active');
+            if ($('.active').length===1) {  // 如果存在一个 active 就代表转账
+                $('.zzcz').show();
+            }else{
+                $('.zzcz').hide();
+            }
+        });
+        $('.zzcz').click(function () {
+            console.log("转账");
+        });
+        $.ajax({
+            url: 'http://' + location.hostname + ':3000/reads/readaccountzh',
+            type: 'get',
+            dataType: 'json',
+            data: {order: "asc", offset: 0, limit: 100},
+            success: function (res) {
+                if (res.code === 1) {
+                }
+                var data = res.data;
+                for (var i = 0; i < data.length; i++) {
+                    var defaultprice = $.fmoney(data[i].defaultprice);
+                    var nowprice = $.fmoney(data[i].price);
+                    $('.lists').append(`
+                   <div class="zjzh">
+                <div class="left"><span>${data[i].name}</span></div>
+                <div class="right">
+                    <div>
+                        <span><i class="iconfont icon-chongzhijine" style="color: salmon"></i>初始金额</span>
+                        <span>${defaultprice}</span>
+                    </div>
+                    <div>
+                        <span><i class="iconfont icon-chongzhijine" style="color: deepskyblue"></i>当前金额</span>
+                        <span>${nowprice}</span>
+                    </div>
+                    <div>
+                        <span><a href="./szlsinfo.html?id=${data[i]._id}"><i class="iconfont icon-shouzhiliushui" style="color: green"></i>收支流水</a></span>
+                        <span><a href="./zzlsinfo.html?id=${data[i]._id}"><i class="iconfont icon-zhuanzhang" style="color: gold"></i>转账流水</a></span>
+                    </div>
+                </div>
+            </div>
+                    `);
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

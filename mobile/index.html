@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>优米云</title>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_547663_dwvndn4yb5fusor.css">
+    <link rel="stylesheet" href="./public/css/public.css">
+    <link rel="stylesheet" href="./public/css/index.css">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+</head>
+<body>
+<div>
+    <!--<div class="top">-->
+    <!--&lt;!&ndash;<div class="top-name">首页</div>&ndash;&gt;-->
+    <!--</div>-->
+    <div class="content">
+        <div>
+            <!--收支情况-->
+            <div class="animated bounceInRight">
+                <div class="sztitle">收支情况</div>
+
+                <!--今年收入总收入-->
+
+                <div class="  szlist ">
+                    <div class="szlistimg">
+                        <img src="./public/image/home-1.png" alt="">
+                    </div>
+                    <div class="szlistbox">
+                        <h3 class="red"><span class="sr"></span>年收入</h3>
+                        <p class="srp">￥0.00</p>
+                    </div>
+                </div>
+
+                <!--今年总支出-->
+                <div class=" szlist ">
+                    <div class="szlistimg">
+                        <img src="./public/image/home-2.png" alt="">
+                    </div>
+                    <div class="szlistbox">
+                        <h3 class="green"><span class="sr"></span>年支出</h3>
+                        <p class="zcp">￥0.00</p>
+                    </div>
+                </div>
+
+                <!--今年盈亏-->
+                <div class=" szlist ">
+                    <div class="szlistimg">
+                        <img src="./public/image/home-3.png" alt="">
+                    </div>
+                    <div class="szlistbox">
+                        <h3 class="red"><span class="sr"></span>年盈亏</h3>
+                        <p class="totalp">￥0.00</p>
+                    </div>
+                </div>
+                <div class="sztitle">账户信息</div>
+                <div class="accountlist">
+                </div>
+                <div class="total">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-box">
+            <div>
+                <a href="#" id="tabactive">
+                    <div><i class="iconfont icon-home"></i></div>
+                    <div><span>首页</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="main.html">
+                    <div><i class="iconfont icon-jilu1"></i></div>
+                    <div><span>日常记账</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="zjgl.html">
+                    <div><i class="iconfont icon-zijinguanli"></i></div>
+                    <div><span>资金管理</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="user.html">
+                    <div><i class="iconfont icon-yonghu"></i></div>
+                    <div><span>我的</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="public/js/jqfz.js"></script>
+<script>
+    var totalmoney = 0, yearsr = 0, yearzc = 0, year = new Date().getFullYear();
+    $(function () {
+        $.auth();
+        $.ajax({
+            url: 'http://' + location.hostname + ':3000/reads/readaccountzh',
+            type: 'get',
+            dataType: 'json',
+            data: {order: "asc", offset: 0, limit: 100},
+            success: function (res) {
+                var data = res.data;
+                for (var i = 0; i < data.length; i++) {
+                    var money = $.fmoney(data[i].price, 2);
+                    totalmoney += parseInt(data[i].price);
+                    $('.accountlist').append(`
+                 <div class=" szlist ">
+                       <div class="szlistimg">
+                           <i style="color: #1296db" class="iconfont icon-licaibao"></i>
+                       </div>
+                       <div class="szlistbox">
+                           <h3 class="red">${data[i].name}</h3>
+                           <p><span>余额</span>￥${money}</p>
+                       </div>
+                   </div>
+                    `);
+                }
+                var totalmoneys = $.fmoney(totalmoney, 2);
+                $('.total').append(`
+                <div class=" szlist ">
+                       <div class="szlistimg">
+                           <i style="color: #1296db;font-size: 2.3rem" class="iconfont icon-leijishouru"></i>
+                       </div>
+                       <div class="szlistbox">
+                           <h3 class="red">总余额</h3>
+                           <p><span>余额</span>￥${totalmoneys}</p>
+                       </div>
+                   </div>
+                `);
+            }
+        });
+        $.ajax({
+            url: 'http://' + location.hostname + ':3000/reads/readyearzctjt',
+            type: 'get',
+            dataType: 'json',
+            data: {years: year},
+            success: function (res) {
+                var data = res.data;
+                if (isArrEmpty(data)) {
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].length < 2 || data[i].length == 0) {   // 当月只有支出或者收入  或者什么也没有
+                            for (var k = 0; k < 1; k++) {
+                                if (data[i].length === 0) {  // 什么也没有
+                                } else {
+                                    if (data[i][k]._id === 1) {
+                                        yearsr += parseFloat(data[i][k].total);
+                                    } else {
+                                        yearzc += parseInt(data[i][k].total);
+                                    }
+                                }
+                            }
+                        } else {
+                            for (var s = 0; s < 2; s++) {
+                                if (data[i][s]._id === 1) {  // 收入
+                                    yearsr += parseInt(data[i][s].total);
+                                } else {
+                                    yearzc += parseInt(data[i][s].total);
+                                }
+                            }
+                        }
+                    }
+                }
+                $('.sr').text(`${year}总收入`);
+                var yearsrs = $.fmoney(yearsr);
+                var yearzcs = $.fmoney(yearzc);
+                var total = $.fmoney(yearsr - yearzc);
+                $('.srp').text(`￥${yearsrs}`);
+                $('.zcp').text(`￥${yearzcs}`);
+                $('.totalp').text(`￥${total}`);
+            }
+        });
+    });
+
+    function isArrEmpty(data) {
+        var ischeak = false;
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].length > 0) {
+                ischeak = true;
+            }
+        }
+        return ischeak;
+    }
+
+</script>
+</body>
+</html>

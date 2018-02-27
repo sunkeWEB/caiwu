@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport">
+    <title>修改密码</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_547663_zxy9ssh255pl23xr.css">
+    <link rel="stylesheet" href="./public/css/public.css">
+    <!--<link rel="stylesheet" href="./public/css/szls.css">-->
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/layer/3.1.0/mobile/need/layer.css" rel="stylesheet">
+    <style>
+       .content{
+           background-color: white;
+           padding-bottom: 1.2rem;
+       }
+       .content > div {
+           display: flex;
+           align-items: center;
+           margin-top: 1rem;
+       }
+        .content label{
+            display: inline-block;
+            font-size: 1rem;
+            text-align: right;
+            width: 5rem;
+            margin-right: 0.5rem;
+        }
+       .content input{
+           height: 1.5rem;
+           flex: 1;
+           border: 0;
+           outline: none;
+           border-bottom: 1px solid #ccc;
+       }
+       .content input:focus{
+           border-bottom: 1px solid #fa4b28;
+       }
+        .update{
+            background-color: #fa4b28;
+            width: 60%;
+            padding: 0.6rem;
+            text-align: center;
+            color: white;
+            border-radius: 10px;
+            margin: 0 auto;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="top">
+        <div class="top-name">
+            <div><i class="back iconfont icon-zuobianjiantou"></i></div>
+            <div class="name"><span>修改密码</span></div>
+        </div>
+    </div>
+    <div class="content" style="padding-top: 2.5rem">
+        <div>
+            <label for="oldpwd">旧密码</label>
+            <input id="oldpwd" type="password" placeholder="请输入你原来的密码">
+        </div>
+        <div>
+            <label for="newpwd">新密码</label>
+            <input id="newpwd" type="password" placeholder="请输入你的新密码">
+        </div>
+        <div>
+            <label for="renewpwd">确认密码</label>
+            <input id="renewpwd" type="password" placeholder="请输入你的确认密码">
+        </div>
+    </div>
+    <div class="update">确认修改</div>
+    <div class="footer">
+        <div class="footer-box">
+            <div>
+                <a href="index.html">
+                    <div><i class="iconfont icon-home"></i></div>
+                    <div><span>首页</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="main.html">
+                    <div><i class="iconfont icon-jilu1"></i></div>
+                    <div><span>日常记账</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="zjgl.html">
+                    <div><i class="iconfont icon-zijinguanli"></i></div>
+                    <div><span>资金管理</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="user.html" id="tabactive">
+                    <div><i class="iconfont icon-yonghu"></i></div>
+                    <div><span>我的</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+<script src="./public/js/common.js"></script>
+<script src="./public/js/jqfz.js"></script>
+<script src="public/js/jquery.cookie.js"></script>
+<script>
+    var userid;
+    $(function () {
+        var res = $.auth();
+        userid = res[0]._id;  // 保存userid
+        $('.back').click(function () {
+            window.history.go(-1);
+        });
+        $('.update').click(function () {
+            var oldpwd = $('#oldpwd').val();
+            var newpwd = $('#newpwd').val();
+            var renewpwd = $('#renewpwd').val();
+
+            if (oldpwd == '') {
+                layer.msg("原密码不能为空");
+                return false;
+            }
+            if (newpwd == '') {
+                layer.msg("新密码不能为空");
+                return false;
+            }
+
+            if (newpwd != renewpwd) {
+                layer.msg("新密码和确认密码不相等");
+                return false;
+            }
+
+            if (userid==='') {
+                layer.msg("账号存在异常 请重新登录");
+                location.href = "./login.html";
+                return false;
+            }
+
+            $.ajax({
+                url:'http://localhost:3000/users/updatepwd',
+                type:'post',
+                dataType:'json',
+                data:{newpwd:newpwd,old:oldpwd,id:userid},
+                success:function (res) {
+                    if (res.code==1) {
+                        layer.msg(res.msg);
+                        return false;
+                    }
+                    layer.msg(res.msg + "请重新登录");
+                    $.cookie('username', null,{
+                        path:'/'
+                    });
+                    location.href = "./login.html";
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>优米云-日常记账</title>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_547663_dwvndn4yb5fusor.css">
+    <link rel="stylesheet" href="./public/css/public.css">
+    <link rel="stylesheet" href="./public/css/main.css">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <style>
+        .app-lists-item:first-child {
+            width: 2rem;
+            height: 5.1rem;
+        }
+
+        .app-lists-item img {
+            max-width: 2rem;
+            max-height: 5.1rem;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="top">
+        <div class="top-name">
+            <div><i class="back iconfont icon-zuobianjiantou"></i></div>
+            <div class="name"><span>日常记账</span></div>
+        </div>
+    </div>
+    <div class="content" style="padding-top: 2.5rem">
+        <div class="app-lists">
+            <div class="app-lists-item">
+                <a href="addjz.html?type=1">
+                    <div><img src="./public/image/s1.png" alt=""/></div>
+                    <div><span>收入记账</span></div>
+                </a>
+            </div>
+            <div class="app-lists-item">
+                <a href="ysyfadd.html?type=1">
+                    <div><img src="./public/image/s2.png" alt=""/></div>
+                    <div><span>应收记账</span></div>
+                </a>
+            </div>
+            <!--<div class="app-lists-item">-->
+            <!--<div><img src="./public/image/s3.png" alt="" /></div>-->
+            <!--<div><span>借出报销</span></div>-->
+            <!--</div>-->
+            <div class="app-lists-item">
+                <a href="./szls.html">
+                    <div><img src="./public/image/s4.png" alt=""/></div>
+                    <div><span>收支流水</span></div>
+                </a>
+            </div>
+        </div>
+        <div class="app-lists">
+            <div class="app-lists-item">
+                <a href="addjz.html?type=0">
+                    <div><img src="./public/image/s5.png" alt=""/></div>
+                    <div><span>支出记账</span></div>
+                </a>
+            </div>
+            <div class="app-lists-item">
+                <a href="ysyfadd.html?type=0">
+                    <div><img src="./public/image/s6.png" alt=""/></div>
+                    <div><span>应收应付</span></div>
+                </a>
+            </div>
+            <!--<div class="app-lists-item">-->
+            <!--<div><img src="./public/image/s7.png" alt="" /></div>-->
+            <!--<div><span>借入归还</span></div>-->
+            <!--</div>-->
+            <div class="app-lists-item">
+                <a href="ysyfls.html">
+                    <div><img src="./public/image/s8.png" alt=""/></div>
+                    <div><span>应收应付流水</span></div>
+                </a>
+            </div>
+        </div>
+        <div class="mothor">
+            <div class="szname red">本月收支情况</div>
+            <div class="szxq">
+                <div class="szxq-list">
+                    <div>
+                        <i style="color: deepskyblue;font-size: 1.3rem" class="iconfont icon-leijishouru"></i>
+                        <span>收入</span><span class="mouthsr">￥0.00</span>
+                    </div>
+                    <div>
+                        <i style="color: deepskyblue;font-size: 1.7rem" class="iconfont icon-zhichuqingkuang"></i>
+                        <span>支出</span><span class="mouthzc">￥0.00</span>
+                    </div>
+                    <div>
+                        <i style="color: deepskyblue;font-size: 1.7rem" class="iconfont icon-yingkuipinghengfenxi"></i>
+                        <span>盈亏</span><span class="mouthtotal">￥0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="srzc"></div>
+    </div>
+    <div class="footer">
+        <div class="footer-box">
+            <div>
+                <a href="index.html">
+                    <div><i class="iconfont icon-home"></i></div>
+                    <div><span>首页</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="main.html" id="tabactive">
+                    <div><i class="iconfont icon-jilu1"></i></div>
+                    <div><span>日常记账</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="zjgl.html">
+                    <div><i class="iconfont icon-zijinguanli"></i></div>
+                    <div><span>资金管理</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="user.html">
+                    <div><i class="iconfont icon-yonghu"></i></div>
+                    <div><span>我的</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="./public/js/common.js"></script>
+<script src="public/js/jqfz.js"></script>
+<script>
+    var mouthsrarr = [], mouthsr = 0, mouthzc = 0, mouthzcarr = [], mouthtotal = 0;
+    $(function () {
+        $('.back').click(function () {
+            window.history.go(-1);
+        });
+        $.auth();
+        var date = getMouthNum();
+        if (date.length != 3) {
+            return false;
+        }
+        $.ajax({
+            url: 'http://' + location.hostname + ':3000/reads/readmouthtjt',
+            type: 'get',
+            dataType: 'json',
+            data: {year: date[0], mouth: date[1], num: date[2]},
+            success: function (res) {
+                var data = res.data;
+                if (isArrEmpty(data)) {
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].length < 2 || data[i].length == 0) {   // 当月只有支出或者收入  或者什么也没有
+                            for (var k = 0; k < 1; k++) {
+                                if (data[i].length === 0) {  // 什么也没有
+                                } else {
+                                    if (data[i][k]._id === 1) {
+                                        mouthsr += parseInt(data[i][k].total);
+                                    } else {
+                                        mouthzc += parseInt(data[i][k].total);
+                                    }
+                                }
+                            }
+                        } else {
+                            for (var s = 0; s < 2; s++) {
+                                if (data[i][s]._id === 1) {  // 收入
+                                    mouthsr += parseInt(data[i][s].total);
+                                } else {
+                                    mouthzc += parseInt(data[i][s].total);
+                                }
+                            }
+                        }
+                    }
+                }
+                var mouthsrs = $.fmoney(mouthsr, 2);
+                var mouthzcs = $.fmoney(mouthzc, 2);
+                var totalprice = parseInt(mouthsr) - parseInt(mouthzc);
+                var total = $.fmoney(totalprice, 2);
+                $('.mouthsr').text(`￥${mouthsrs}`);
+                $('.mouthzc').text(`￥${mouthzcs}`);
+                $('.mouthtotal').text(`￥${total}`);
+            }
+        });
+    });
+
+    function getMouthNum() {
+        //构造当前日期对象
+        var date = new Date();
+        //获取年份
+        var year = date.getFullYear();
+        //获取当前月份
+        var mouths = date.getMonth() + 1;
+        //定义当月的天数；
+        var days;
+        //当月份为二月时，根据闰年还是非闰年判断天数
+        if (mouths == 2) {
+            days = year % 4 == 0 ? 29 : 28;
+        }
+        else if (mouths == 1 || mouths == 3 || mouths == 5 || mouths == 7 || mouths == 8 || mouths == 10 || mouths == 12) {
+            //月份为：1,3,5,7,8,10,12 时，为大月.则天数为31；
+            days = 31;
+        }
+        else {
+            //其他月份，天数为：30.
+            days = 30;
+        }
+        return [year, mouths, days];
+    }
+
+    function isArrEmpty(data) {
+        var ischeak = false;
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].length > 0) {
+                ischeak = true;
+            }
+        }
+        return ischeak;
+    }
+</script>
+</body>
+</html>

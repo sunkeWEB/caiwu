@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport">
+    <title>添加账务</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_547663_zxy9ssh255pl23xr.css">
+    <link rel="stylesheet" href="./public/css/public.css">
+    <link rel="stylesheet" href="./public/css/szls.css">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="./public/js/layDate/laydate/theme/default/laydate.css">
+    <style>
+        .lists {
+            padding: 1rem;
+            background-color: white;
+        }
+
+        .form-group {
+            display: flex;
+        }
+
+        .form-group label {
+            width: 6rem;
+            text-align: right;
+            max-width: 150px;
+        }
+        .savebtn {
+            background-color: #1296db;
+            color: white;
+            padding: 0.5rem 0;
+            border-radius: 4px;
+            text-align: center;
+            padding-left: 0.5rem;
+            margin-left: 6rem;
+            max-width: 255px;
+        }
+
+        .form-group > div {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="top">
+        <div class="top-name">
+            <div><i class="back iconfont icon-zuobianjiantou"></i></div>
+            <div class="name"><span>添加账务</span></div>
+        </div>
+    </div>
+    <div class="content" style="padding-top: 2.5rem">
+        <div class="lists">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">类型</label>
+                    <div class="col-sm-10 col-md-4 col-lg-4">
+                        <select class="form-control m-b srzcoption" name="account">
+                            <option value="1">应收</option>
+                            <option value="0">应付</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所属大类</label>
+                    <div class="col-sm-10 col-md-4 col-lg-4">
+                        <select class="form-control m-b ssdl" name="account">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所属小类</label>
+                    <div class="col-sm-10 col-md-4 col-lg-4">
+                        <select class="form-control m-b ssxl" name="account">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span id="ysoryf">应收</span>金额</label>
+                    <div class="col-sm-10 col-md-4 col-lg-4">
+                        <input type="number" class="form-control price">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">记账时间</label>
+                    <div class="col-sm-10 col-md-4 col-lg-4">
+                        <input type="text" class="form-control" placeholder="请选择记账时间" id="test1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">收款期限</label>
+                    <div class="col-sm-10 col-md-4 col-lg-4">
+                        <input type="text" class="form-control" placeholder="请选择收款期限" id="test2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">生意伙伴</label>
+                    <div class="col-sm-10 col-md-4 col-lg-4">
+                        <select class="form-control  syhb" name="account" data-live-search="true">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">业务项目</label>
+                    <div class="col-sm-10 col-md-4 col-lg-4">
+                        <select class="form-control m-b ywxm selectpicker" name="account"
+                                data-live-search="true">
+                        </select>
+                    </div>
+                </div>
+             
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">说明</label>
+                    <div class="ccol-sm-10 col-md-4 col-lg-4">
+                        <textarea class="form-control sm1" name="" rows="5" style="width: 100%"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="savebtn">保存</div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-box">
+            <div>
+                <a href="index.html">
+                    <div><i class="iconfont icon-home"></i></div>
+                    <div><span>首页</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="main.html" id="tabactive">
+                    <div><i class="iconfont icon-jilu1"></i></div>
+                    <div><span>日常记账</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="zjgl.html">
+                    <div><i class="iconfont icon-zijinguanli"></i></div>
+                    <div><span>资金管理</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="user.html">
+                    <div><i class="iconfont icon-yonghu"></i></div>
+                    <div><span>我的</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="./public/js/layDate/laydate/laydate.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+<script src="public/js/jqfz.js"></script>
+<script src="./public/js/common.js"></script>
+<script>
+    var dengji, id,xtype, data,username,userid;
+    var type = location.search.substr(6);
+    $(function () {
+        var res = $.auth();
+        username = res[0].zsname;
+        userid= res[0]._id;
+        $('.srzcoption').selectpicker('val', type);
+        $('.srzcoption').selectpicker({
+            style: 'btn-white',
+            size: 5,
+        });
+        $('.srzcoption').selectpicker('refresh');
+        var res = $.auth();
+        laydate.render({
+            elem: '#test1' //指定元素
+        });
+       laydate.render({
+            elem: '#test2' //指定元素
+        });
+        $('.back').click(function () {
+            window.history.go(-1);
+        });
+        $('.srzcoption').selectpicker({
+            style: 'btn-white',
+            size: 5,
+        });
+        getDxtype(type);
+        getFate();
+        //保存 数据库
+        $('.savebtn').click(function () {
+            var type = $('.srzcoption').find('option:selected').val(); // 收入支出
+            var dtype = $('.ssdl').find('option:selected').text();// 大类
+            var xtype = $('.ssxl').find('option:selected').text();// 小类
+            var price = $('.price').val();// 金额
+            var time = $('#test1').val();// 记账时间
+            var time1 = $('#test2').val();// 收款时间
+          console.log(time);
+            var syhb = $('.syhb').find('option:selected').text();// 生意伙伴
+            var ywxm = $('.ywxm').find('option:selected').text();// 业务项目
+            var sm1 = $('.sm1').val();// 说明
+            var jbpeople = "sunke";// 经办人
+            var data = {
+                dtype:parseInt(type),
+                ssdtype:dtype,
+                ssxtype:xtype,
+                price:parseInt(price),
+                yshb:syhb,
+                ywxm:ywxm,
+                jbr:jbpeople,
+                sm:sm1,
+                time:new Date(time) / 1000,
+                time1:new Date(time1) / 1000,
+                jzr:username,
+                jzrid:userid
+            };
+            $.ajax({
+                url:'http://'+location.hostname+':3000/dxtypes/addysyf',
+                type:'post',
+                data:data,
+                dataType:'json',
+                success:function(res) {
+                    if (res.code == 1) {
+                        layer.msg(res.msg);
+                        return false;
+                    }
+                    layer.msg(res.msg);
+                    $('input').val('');
+                }
+            });
+        });
+        // 大类改动  小类联动
+        $('.ssdl').change(function (e) {
+            e.stopPropagation();
+            $('.ssxl option').remove();
+            var nums = $(this).find('option:selected').data('num');
+            xtype[nums].forEach(function (its) {
+                $('.ssxl').append(`<option value="${its}">${its}</option>`);
+            });
+            //小类
+            $('.ssxl').nextAll().remove();  // bug
+            $('.ssxl').selectpicker('refresh');
+        });
+        // 类型改变  大类联动
+        $('.srzcoption').change(function (e) {
+            e.stopPropagation();
+            var typess = $(this).find('option:selected').val();
+            getDxtype(typess.toString());
+        });
+    });
+
+    function getDxtype(type) {
+        $.ajax({
+            url: 'http://' + location.hostname + ':3000/reads/readdalei',
+            type: 'get',
+            dataType: 'json',
+            data: {type: type},
+            success: function (res) {
+                if (!res.code == 0) {
+                    layer.msg("系统错误  获取失败");
+                    return false;
+                }
+                $('.ssxl option').remove();
+                $('.ssdl option').remove();
+
+                data = res.data;
+                xtype = [];
+                data.forEach(function (item, index) {
+                    $('.ssdl').append(`<option value="${item.name}" data-num="${index}">${item.name}</option>`);
+                    var items = item.sunlist;
+                    if (items.length > 0) {
+                        var xx = [];
+                        items.forEach(function (xxx) {
+                            xx.push([xxx.name]);
+                        });
+                        xtype.push(xx);
+                    } else {
+                        xtype.push([]);
+                    }
+                });
+
+                //所属大类下拉 初始化
+                $('.ssdl').selectpicker({
+                    style: 'btn-white',
+                    size: 5,
+                });
+
+                // 小类初始化
+                xtype[0].forEach(function (its) {
+                    $('.ssxl').append(`<option value="${its}">${its}</option>`);
+                });
+                $('.ssxl').selectpicker({
+                    style: 'btn-white',
+                    size: 5,
+                });
+                $('.ssdl').nextAll().remove();  // bug
+                $('.ssdl').selectpicker('refresh');
+                $('.ssxl').nextAll().remove();  // bug
+                $('.ssxl').selectpicker('refresh');
+            }
+        });
+    }
+
+    function getFate() {
+        $.ajax({
+            url: 'http://' + location.hostname + ':3000/reads/readyshb',
+            type: 'get',
+            dataType: 'json',
+            success: function (res1) {
+                if (res1.code != 0) {
+                    layer.msg("初始化数据失败");
+                    return false;
+                }
+                $('.syhb option').remove();
+                $('.ywxm option').remove();
+                $('.syhb option').remove();
+                //业务项目
+                res1.gcxm.forEach(function (items) {
+                    $('.ywxm').append(`<option value="${items.name}">${items.name}</option>`);
+                });
+                res1.yshb.forEach(function (items) {
+                    $('.syhb').append(`<option value="${items.name}">${items.name}</option>`);
+                });
+
+                res1.yhzh.forEach(function (items) {
+                    $('.yinhan').append(`<option value="${items.name}">${items.name}</option>`);
+                });
+
+                $('.ywxm').selectpicker({
+                    style: 'btn-white',
+                    size: 5,
+                    liveSearchPlaceholder: '查找你的生意伙伴',
+                    noneResultsText: '没有查询到相关的信息'
+                });
+                $('.ywxm').nextAll().remove();  // bug
+                $('.ywxm').selectpicker('refresh');
+                $('.syhb').selectpicker({
+                    style: 'btn-white',
+                    size: 5,
+                    liveSearchPlaceholder: '查找你的生意伙伴',
+                    noneResultsText: '没有查询到相关的信息'
+                });
+                $('.syhb').nextAll().remove();  // bug
+                $('.syhb').selectpicker('refresh');
+            }
+        });
+    }
+</script>
+</body>
+</html>

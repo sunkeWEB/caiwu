@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport">
+    <title>小类管理</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_547663_zxy9ssh255pl23xr.css">
+    <link rel="stylesheet" href="./public/css/public.css">
+    <link rel="stylesheet" href="./public/css/szls.css">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link href="https://cdn.bootcss.com/layer/3.1.0/mobile/need/layer.css" rel="stylesheet">
+    <style>
+        .lists {
+            padding: 0.5rem;
+        }
+
+        .footer-lists-items {
+            border-top: 1px solid #e9e9e9;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .footer-lists-items > div {
+            border: 1px solid #e9e9e9;
+            font-size: 0.8rem;
+            padding: 0.4rem 0.8rem;
+            text-align: right;
+            margin-top: 0.5rem;
+        }
+        .add{
+            padding-right: 1rem;
+        }
+        .form-group{
+            display: flex;
+            align-items: center;
+        }
+        .modal-body label{
+            text-align: right;
+            margin-right: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">添加小类</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group typesss" style="display: flex">
+                        <label class="control-label" style="width: 122px">类型</label>
+                        <div class="" style="width: 100%">
+                            <select class="form-control m-b srzcoptions" name="account">
+                                <option value="1">收入</option>
+                                <option value="0">支出</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group sdsss" style="display: flex">
+                        <label class="control-label" style="width: 122px">所属大类</label>
+                        <div class="" style="width: 100%">
+                            <select class="form-control m-b ssdl" name="account">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: flex">
+                        <label class="control-label" style="width: 122px">小类名称</label>
+                        <div class="" style="width: 100%">
+                            <input type="text" class="form-control slname">
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: flex">
+                        <label class="control-label" style="width: 122px">小类说明</label>
+                        <div class="" style="width: 100%">
+                            <input type="text" class="form-control slsm">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary addxtype">添加</button>
+                    <button type="button" class="btn btn-primary updatextype" style="display: none">修改</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="top">
+        <div class="top-name">
+            <div><i class="back iconfont icon-zuobianjiantou"></i></div>
+            <div class="name"><span>小类管理</span></div>
+            <div class="add" data-toggle="modal" data-target="#myModal1">添加</div>
+        </div>
+    </div>
+    <div class="serchdiv">
+        <button class="serchdivactive">全部</button>
+        <button>收入</button>
+        <Button>支出</Button>
+    </div>
+    <div class="content" style="padding-top: 5.1rem">
+        <div class="lists">
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-box">
+            <div>
+                <a href="index.html">
+                    <div><i class="iconfont icon-home"></i></div>
+                    <div><span>首页</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="main.html">
+                    <div><i class="iconfont icon-jilu1"></i></div>
+                    <div><span>日常记账</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="zjgl.html">
+                    <div><i class="iconfont icon-zijinguanli"></i></div>
+                    <div><span>资金管理</span></div>
+                </a>
+            </div>
+            <div>
+                <a href="user.html" id="tabactive">
+                    <div><i class="iconfont icon-yonghu"></i></div>
+                    <div><span>我的</span></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="./public/js/common.js"></script>
+<script src="./public/js/jqfz.js"></script>
+<script>
+    $(function () {
+        $.auth();
+        $('.back').click(function () {
+            window.history.go(-1);
+        });
+        $('.serchdiv button').click(function () {
+            $(this).siblings().removeClass('serchdivactive');
+            $(this).addClass('serchdivactive');
+        });
+        $('.srzcoptions').change(function (e) {
+            e.stopPropagation();
+            var typess = $(this).find('option:selected').val();
+            getDxtype(typess.toString());
+        });
+        load();
+        getDxtype("1");
+        // 添加小类
+        $('.addxtype').click(function () {
+            var dtype = $('.srzcoptions').find('option:selected').val();
+            var type = $('.ssdl').find('option:selected').val();
+            var name = $('.slname').val();
+            var sm = $('.slsm').val();
+            if (dtype == '') {
+                layer.msg("收入支出不能为空");
+                return false;
+            }
+            if (type == '') {
+                layer.msg("大类名称不能为空");
+                return false;
+            }
+            if (name == '') {
+                layer.msg("小类名称不能为空");
+                return false;
+            }
+            var data = {
+                stype: dtype,
+                sname: type,
+                name: name,
+                sm: sm
+            };
+            $.ajax({
+                url: 'http://'+location.hostname+':3000/dxtypes/addxtypes',
+                data: data,
+                type: 'post',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code == 1) {
+                        layer.msg(res.msg);
+                        return false;
+                    }
+                    layer.msg(res.msg);
+                    $('.lists').empty();
+                    $('#myModal1').modal('hide');
+                    $('.modal-body input').val('');
+                    load();
+                }
+            });
+        });
+
+        $('.updatextype').click(function(){
+            var name = $('.slname').val();
+            var sm = $('.slsm').val();
+            var data = {
+                name: name,
+                sm: sm,
+                sname:psname,
+                id:pid
+            };
+            $.ajax({
+                url:'http://localhost:3000/dxtypes/updatextype',
+                data:data,
+                dataType:'json',
+                type:'post',
+                success:function(res) {
+                    if (res.code!=0) {
+                        layer.msg(res.msg);
+                        return false;
+                    }
+                    layer.msg(res.msg);
+                    $('.lists').empty();
+                    $('#myModal1').modal('hide');
+                    $('.modal-body input').val('');
+                    load();
+                }
+            })
+        });
+    });
+
+    function load() {
+        $.ajax({
+            url: 'http://' + location.hostname + ':3000/reads/readxtypes',
+            type: 'get',
+            dataType: 'json',
+            data: {order: "asc", offset: 0, limit: 100},
+            success: function (res) {
+                if (res.code === 1) {
+                }
+                var data = res.data;
+                for (var i = 0; i < data.length; i++) {
+                    $('.lists').append(`
+                     <div class="lists-items">
+                <div class="top-lists-items">
+                    <div><span><i class="iconfont icon-xiangmu"> ${data[i].name}</i></span></div>
+                    <div class="right"><span style="font-size: 0.8rem">${data[i].dtype===1?'收入':'支出'}</span></div>
+                </div>
+                <div class="body-lists-items">
+                    <div style="padding: 0.5rem 0">
+                        <i class="iconfont icon-jiaqileixing"></i> <span>所属大类</span> : <span>${data[i].sname}</span>
+                    </div>
+                    <div style="padding-bottom: 0.5rem">
+                        <i class="iconfont icon-beizhu"></i> <span>备注</span> : <span>${data[i].sm}</span>
+                    </div>
+                    <div class="footer-lists-items">
+                        <div onclick="edit('${data[i].name}','${data[i]._id}','${data[i].sname}','${data[i].sm}')">修改</div>
+                        <div onclick="del('${data[i].name}','${data[i]._id}','${data[i].sname}')">删除</div>
+                    </div>
+                </div>
+            </div>
+                    `);
+                }
+            }
+        });
+    }
+
+    function del(name, id, sname) {
+        layer.confirm('你确定删除 ' + name + ' 嘛？', {
+            btn: ['果断删除', '放弃'] //按钮
+        }, function () {
+            var url = "http://"+location.hostname+":3000/dxtypes/delxtype";
+            $.ajax({
+                url: url,
+                data: {id: id, sname: sname},
+                dataType: 'json',
+                type: 'post',
+                success: function (res) {
+                    if (res.code == 1) {
+                        layer.msg(res.msg);
+                        return false;
+                    }
+                    $('.lists').empty();
+                    layer.msg(res.msg);
+                    load();
+                }
+            });
+        });
+    }
+
+    function getDxtype(type) {
+        var res = $.sendAjax('http://'+location.hostname+':3000/reads/readdalei', 'get', {type: type});
+        if (!res.code == 0) {
+            layer.msg("系统错误  获取失败");
+            return false;
+        }
+        $('.ssxl option').remove();
+        $('.ssdl option').remove();
+
+        data = res.data;
+        xtype = [];
+        data.forEach(function (item, index) {
+            $('.ssdl').append(`<option value="${item.name}" data-num="${index}">${item.name}</option>`);
+            var items = item.sunlist;
+            if (items.length > 0) {
+                var xx = [];
+                items.forEach(function (xxx) {
+                    xx.push([xxx.name]);
+                });
+                xtype.push(xx);
+            } else {
+                xtype.push([]);
+            }
+        });
+
+        //所属大类下拉 初始化
+        $('.ssdl').selectpicker({
+            style: 'btn-white',
+            size: 5,
+        });
+
+        $('.srzcoptions').selectpicker({
+            style: 'btn-white',
+            size: 5,
+        });
+        $('.ssdl').nextAll().remove();  // bug
+        $('.ssdl').selectpicker('refresh');
+    }
+
+    function edit(name, id, sname,sm) {
+        pid = id;
+        psname = sname;
+        $('.typesss').css('display', 'none');
+        $('.sdsss').css('display', 'none');
+        $('#myModalLabel1').text("修改信息");
+        $('.slname').val(name);
+        $('.slsm').val(sm);
+        $('.addxtype').css('display', 'none');
+        $('.updatextype').css('display', 'inline-block');
+        $('#myModal1').modal('show');
+    }
+
+    //  这里公用一个modal 修改class
+    $('#myModal1').on('hidden.bs.modal', function (e) {
+        $('.typesss').css('display', 'flex');
+        $('.sdsss').css('display', 'flex');
+        $('.addxtype').css('display', 'inline-block');
+        $('.updatextype').css('display', 'none');
+        $('#myModalLabel1').text("添加信息");
+        $('.slname').val('');
+        $('.slsm').val('');
+    });
+
+</script>
+</body>
+</html>

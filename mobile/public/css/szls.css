@@ -1,0 +1,61 @@
+.serchdiv {
+    position: fixed;
+    top: 2.5rem;
+    left: 0;
+    background-color: white;
+    width: 100%;
+    border-bottom: 1px solid #e9e9e9;
+    text-align: right;
+}
+
+
+.serchdiv {
+    padding: 0.5rem;
+}
+
+.serchdiv button {
+    margin-right: 1rem;
+    background-color: white;
+    border: 1px solid #e9e9e9;
+    padding: 0.3rem;
+    width: 50px;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 0.5rem;
+    color: #9d9a9b;
+}
+
+.serchdivactive {
+    border: 1px solid #fa4b28 !important;
+    color: #fa4b28 !important;
+}
+
+.lists-items {
+    background-color: white;
+    padding: 0.5rem;
+    margin-top: 0.8rem;
+}
+
+.lists-items span{
+    font-size: 0.9rem;
+}
+
+
+.top-lists-items {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.top-lists-items span{
+    font-size: 0.8rem;
+}
+
+.top-lists-items {
+    color: #9d9a9b;
+}
+
+.top-lists-items .right {
+    flex: 1;
+    text-align: right;
+}
